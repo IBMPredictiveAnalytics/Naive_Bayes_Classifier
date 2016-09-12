@@ -1,0 +1,2 @@
+# Naive_Bayes_Classifier
+Naive Bayes classification with optional predictor selection Description: This extension provides a user interface for the NAIVEBAY  ES command. It fits the Naive Bayes classification model for a catego  rical dependent variable. You can specify whether all available predi  ctors are used or whether the procedure selects the best predictors.   The extension can also be used for predictor selection without classi  fication.
