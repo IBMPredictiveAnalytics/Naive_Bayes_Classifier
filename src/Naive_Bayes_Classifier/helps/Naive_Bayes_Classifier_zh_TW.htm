@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Bayes 法</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Bayes 法</h1>
+<p>單純貝氏分類器延伸符合種類應變數的單純貝氏分類模型。您可以指定是否使用所有可用的預測變數，或者程序是否選取最佳預測變數。延伸也可以用於預測變數選擇，而無需分類。</p>
+<h2>變數</h2>
+<p><span class="runinhead">應變數。</span>指定要分析的數值或字串變數。</p>
+<p><span class="runinhead">變數規格方法。</span>您可以指定要從分析中排除的一組變數，或指定要併入分析的一組因數和共變數。如果您未指定任何要排除的變數或任何候選因數或共變數，則會併入所有變數（應變數及加權變數除外）。</p>
+<p><span class="runinhead">要排除的變數。</span>指定要從分析中排除的變數。依預設，該程序從剩餘變數（一律排除應變數及加權變數）中選取最佳預測變數。</p>
+<p><span class="runinhead">因數和共變數。</span>指定要併入分析的因數和共變數。因數會被視為種類變數，並且可以具有數值或字串值。共變數會被視為尺度變數，並且必須是數值。依預設，該程序會從指定的因數和共變數集中選取最佳預測變數。</p>
+<p><span class="runinhead">強制變數。</span>您可以指定一律在分類模型中使用的因數和共變數。強制因數會被視為類別變數，並且可以具有數值或字串值。強制共變數會被視為尺度變數，並且必須是數值。</p>
+<h2>輸出</h2>
+<p><span class="runinhead">觀察值處理摘要。</span>彙總分析中包括及排除的觀察值數目。</p>
+<p><span class="runinhead">排除的預測變數。</span>列出因所有觀察值的遺漏或常數值而排除的預測變數。排除的預測變數依類型（種類或尺度）顯示。</p>
+<p><span class="runinhead">選取的預測變數。</span>依類型（種類或尺度）顯示選取的預測變數。</p>
+<p><span class="runinhead">預測變數子集摘要。</span>顯示預測變數子集的順序摘要。</p>
+<p><span class="runinhead">觀察值的分類。</span>顯示每一個應變數類別正確及不正確地分類的觀察值數目。如果定義檢定資料，則會針對訓練及檢定樣本提供分類結果。如果未定義檢定資料，則僅針對訓練樣本提供分類結果。</p>
+<h2>儲存(V)</h2>
+<p><span class="runinhead">預測值及預測機率。</span>您可以將預測值及預測機率儲存為作用中資料集中的新變數。預測值是應變數類別，其最高預測變數機率如 Naive Bayes 模型所估計。系統會儲存應變數前 N 個種類的預測機率，依預設其中 N 為 25。</p>
+<h2>選項</h2>
+<p><span class="runinhead">種類變數的使用者遺漏值。</span>控制在分析中排除還是併入種類變數的使用者遺漏值。比例變數的使用者遺漏值會被一律排除。一律排除任何變數的系統遺漏值。</p>
+<p><span class="runinhead">訓練樣本。</span>您可以透過指定隨機選取的觀察值百分比以指派給訓練範例，將作用中資料集分割為訓練及檢定樣本。</p>
+<p><span class="runinhead">預測變數選擇。</span></p>
+<p class="bullet">&bull;&nbsp;<I>從子集序列中選取最佳子集</I>。依預設，Naive Bayes 程序從子集序列中選取預測變數的最佳子集，並且每一個子集中的預測變數數目不斷增加。該程序會自動判定最大子集的大小，但是您也可以指定明確的上限子集大小。當作用中資料集分割為訓練和檢定樣本時，您可以選擇是從基於訓練樣本的虛擬 BIC 準則還是從基於檢定樣本的檢定資料準則來判定最佳子集。</p>
+<p class="bullet">&bull;&nbsp;<I>選取最佳指定大小子集</I>。此選項指定要併入最佳子集的確切預測變數數目。</p>
+<p class="bullet">&bull;&nbsp;<I>使用所有指定的預測變數</I>。此選項指出所有指定的預測變數都併入最終子集，並且對於不選取預測變數的模型建置而言非常有用。</p>
+<p><span class="runinhead">時間限制。</span>指定可以執行 Naive Bayes 程序的分鐘數目上限。如果超出時間限制，則會終止程序，並且不提供任何結果。指定值 0 會關閉計時器。</p>
+<p><span class="runinhead">用於儲存訓練資料的記憶體上限。</span>指定在計算平均對數概似值時，Naive Bayes 程序用來儲存訓練資料記錄的記憶體數量上限 (MB)。如果儲存記錄所需的記憶體數量較大，則會改用模擬資料。</p>
+<p><span class="runinhead">尺度預測變數的 Bin 數目。</span>指定將尺度預測變數的網域分成寬度相等的 Bin 時，要使用的 Bin 數目。</p>
+<h2>其他特性</h2>
+<p>此對話框會產生 NAIVEBAYES 指令的語法。在 NAIVEBAYES 語法中，您可以指定變數，將資料集分割為訓練和檢定樣本。此外，您可以將 Naive Bayes 模型儲存至 XML 檔案，讓您可以使用模型來評分新資料。</p>
+<p>如需 Naive Bayes 程序的相關資訊，請參閱 IBM SPSS Statistics 說明系統中 NAIVEBAYES 指令的說明文件。</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Naive Bayes</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Naive Bayes</h1>
+<p>L'extension du modèle de classification Naive Bayes ajuste le modèle de classification Naive Bayes pour une variable dépendante catégorielle. Vous pouvez préciser si tous les prédicteurs disponibles sont utilisés ou si la procédure sélectionne les meilleurs prédicteurs. L'extension peut également être utilisée pour la sélection des prédicteurs sans classification.</p>
+<h2>Variables</h2>
+<p><span class="runinhead">Variable dépendante.</span> Spécifiez la variable numérique ou de chaîne à analyser. </p>
+<p><span class="runinhead">Méthode de spécification des variables.</span> Vous pouvez spécifier un ensemble de variables à exclure de l'analyse ou l'ensemble des facteurs et covariables à inclure dans l'analyse. Si vous ne spécifiez pas de variable à exclure ou de facteur ou covariable candidat, toutes les variables (exceptée la variable dépendante et la variable de pondération) sont incluses. </p>
+<p><span class="runinhead">Variables à exclure.</span> Spécifiez les variables à exclure de l'analyse. Par défaut, la procédure sélectionne les meilleurs prédicteurs parmi les variables restantes (la variable dépendante et la variable de pondération sont toujours exclues).</p>
+<p><span class="runinhead">Facteurs et covariables.</span> Spécifiez les facteurs et covariables à inclure dans l'analyse. Les facteurs sont traités comme des variables catégorielles et peuvent posséder des valeurs numériques ou des valeurs de chaîne. Les covariables sont traitées comme des variables d'échelle et doivent être numériques. Par défaut, la procédure sélectionne les meilleurs prédicteurs dans l'ensemble de facteurs et de covariables spécifié. </p>
+<p><span class="runinhead">Variables forcées.</span> Vous pouvez spécifier les facteurs et covariables qui sont toujours utilisés dans le modèle de classification. Les facteurs forcés sont traités comme des variables catégorielles et peuvent posséder des valeurs numériques ou des valeurs de chaîne. Les covariables forcées sont traitées comme des variables d'échelle et doivent être numériques.</p>
+<h2>Sortie</h2>
+<p><span class="runinhead">Récapitulatif du traitement des observations.</span> Récapitule le nombre d'observations incluses et exclues dans l'analyse.</p>
+<p><span class="runinhead">Prédicteurs exclus.</span> Récapitule les prédicteurs exclus en raison de valeurs constantes ou manquantes pour l'ensemble des observations. Les prédicteurs exclus sont affichés par type (catégoriel ou échelle).</p>
+<p><span class="runinhead">Prédicteurs sélectionnés.</span> Affiche les prédicteurs sélectionnés par type (catégoriel ou échelle).</p>
+<p><span class="runinhead">Récapitulatif des sous-ensembles de prédicteurs.</span> Affiche un récapitulatif de la séquence des sous-ensembles de prédicteurs.</p>
+<p><span class="runinhead">Classification des observations.</span> Affiche le nombre d'observations classées correctement et incorrectement pour chaque catégorie de variables dépendantes. Si des données de test sont définies, les résultats de la classification sont indiqués pour les échantillons d'apprentissage et de test. Si elles ne le sont pas, les résultats de la classification sont indiqués uniquement pour l'échantillon d'apprentissage. </p>
+<h2>Sauvegarder</h2>
+<p><span class="runinhead">Valeur prédite et probabilités prédites.</span> Vous pouvez sauvegarder les valeurs prédites et les probabilités prédites en tant que nouvelles variables dans le jeu de données actif. La valeur prédite correspond à la catégorie de variables dépendantes dont la probabilité a posteriori est la plus élevée, selon le modèle de Naive Bayes. Les probabilités prédites des N premières catégories de la variable dépendante sont sauvegardées, N étant égal à 25 par défaut. </p>
+<h2>Options</h2>
+<p><span class="runinhead">Valeurs manquantes de l'utilisateur pour les variables catégorielles.</span> Contrôle si les valeurs manquantes de l'utilisateur des variables catégorielles sont exclues ou incluses dans l'analyse. Les valeurs manquantes de l'utilisateur pour les variables d'échelle sont toujours exclues. Les valeurs manquantes du système pour toute variable sont toujours exclues. </p>
+<p><span class="runinhead">Echantillon d'apprentissage
+.</span> Vous pouvez partitionner le jeu de données actif en échantillons d'apprentissage et de test en spécifiant un pourcentage d'observations sélectionnées de manière aléatoire à affecter à l'échantillon d'apprentissage. </p>
+<p><span class="runinhead">Sélection du prédicteur.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Sélectionnez le meilleur sous-ensemble de la séquence de sous-ensembles</I>. Par défaut, la procédure de Naive Bayes sélectionne le meilleur sous-ensemble de prédicteurs dans une séquence de sous-ensembles, avec un nombre croissant de prédicteurs dans chaque sous-ensemble. La procédure détermine automatiquement la taille du sous-ensemble le plus grand, mais vous pouvez également spécifier une taille maximale de sous-ensemble explicite. Si le jeu de données actif est partitionné en échantillons d'apprentissage et de test, vous pouvez choisir si le meilleur sous-ensemble est déterminé à partir d'un critère pseudo-BIC basé sur l'échantillon d'apprentissage ou d'un critère de données de test basé sur l'échantillon de test. </p>
+<p class="bullet">&bull;&nbsp;<I>Sélectionnez le meilleur sous-ensemble de la taille spécifiée</I>. Ce choix spécifie le nombre exact de prédicteurs à inclure dans le meilleur sous-ensemble.</p>
+<p class="bullet">&bull;&nbsp;<I>Utiliser tous les prédicteurs spécifiés</I>. Ce choix indique que tous les prédicteurs spécifiés sont inclus dans le sous-ensemble final et permet de générer un modèle sans sélectionner de prédicteurs. </p>
+<p><span class="runinhead">Limite de temps.</span> Spécifie le nombre maximal de minutes pendant lesquelles la procédure de Naive Bayes peut être exécutée. Si cette limite est dépassée, la procédure est terminée et aucun résultat n'est renvoyé. La valeur 0 désactive le minuteur. </p>
+<p><span class="runinhead">Quantité de mémoire maximale pour le stockage des données d'apprentissage.</span> Spécifie la quantité maximale de mémoire en mégaoctets (Mo) utilisée par la procédure de Naive Bayes pour stocker les enregistrements de données d'apprentissage lors du calcul de la moyenne de log de vraisemblance. Si la quantité de mémoire requise pour stocker les enregistrements est plus importante, des données simulées sont utilisées à la place. </p>
+<p><span class="runinhead">Nombre d'observations des prédicteurs d'échelle.</span> Spécifie le nombre d'observations à utiliser lorsque le domaine d'un prédicteur d'échelle est divisé en observations de même largeur.</p>
+<h2>Fonctions supplémentaires</h2>
+<p>Cette boîte de dialogue génère une syntaxe pour la commande NAIVEBAYES. Dans la syntaxe de la commande NAIVEBAYES, vous pouvez spécifier une variable qui partitionne le jeu de données en échantillons d'apprentissage et de test. Vous pouvez également sauvegarder le modèle Naive Bayes dans un fichier XML afin de pouvoir évaluer de nouvelles données à l'aide de ce modèle. </p>
+<p>Pour plus d'informations sur la procédure de Naive Bayes, consultez la documentation de la commande NAIVEBAYES dans le système d'aide d'IBM SPSS Statistics. </p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

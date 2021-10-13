@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?><!--***********************************************************************--><!----><!--Licensed Materials - Property of IBM--><!----><!--IBM SPSS Products: Modeler Common--><!----><!--(C) Copyright IBM Corp. 1989, 2016--><!----><!--US Government Users Restricted Rights - Use, duplication or disclosure--><!--restricted by GSA ADP Schedule Contract with IBM Corp.--><!----><!--***********************************************************************--><Extension debug="false" version="8.0" xmlns="http://xml.spss.com/pasw/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.spss.com/pasw/extension http://xml.spss.com/pasw/extension/ExtensionSpecification.xsd">
+  <ExtensionDetails description="Created by CDB" id="Naive_Bayes_Classifier" label="Naive Bayes" provider="IBM SPSS, Inc." providerTag="spss" version="8.0"/>
+  <Resources>
+    <Bundle id="bundle436" path="Naive_Bayes_Classifier" type="properties"/>
+    <JarFile id="jar" path="cdb_peer.jar"/>
+    <HelpInfo id="HTMLHelp" type="HTMLHelp"/>
+  </Resources>
+  <CommonObjects>
+    <PropertyTypes>
+      <Enumeration id="variable_specification">
+        <Enum resourceKey="variable_specification_exclude" value="variable_specification_exclude"/>
+        <Enum resourceKey="variable_specification_include" value="variable_specification_include"/>
+      </Enumeration>
+      <Enumeration id="missing">
+        <Enum resourceKey="missing_exclude" value="missing_exclude"/>
+        <Enum resourceKey="missing_include" value="missing_include"/>
+      </Enumeration>
+      <Enumeration id="trainingsample">
+        <Enum resourceKey="trainingsample_none" value="trainingsample_none"/>
+        <Enum resourceKey="trainingsample_pct" value="trainingsample_pct"/>
+      </Enumeration>
+      <Enumeration id="subset">
+        <Enum resourceKey="subset_max" value="subset_max"/>
+        <Enum resourceKey="subset_exact" value="subset_exact"/>
+        <Enum resourceKey="subset_none" value="subset_none"/>
+      </Enumeration>
+      <Enumeration id="bestsubset">
+        <Enum resourceKey="bestsubset_pseudobic" value="bestsubset_pseudobic"/>
+        <Enum resourceKey="bestsubset_testdata" value="bestsubset_testdata"/>
+      </Enumeration>
+    </PropertyTypes>
+    <PropertySets/>
+    <Actions/>
+  </CommonObjects>
+  <Feature canGenerateASL="false" id="Naive_Bayes_Classifier" includesAnnotation="false" peerClass="com.spss.shared.custom_gui.ui_builder.peers.RStatsBuilderPeer" resourceKey="Naive_Bayes_Classifier">
+    <DisplayLabels>
+      <DisplayLabel>
+        <PropertyCondition op="isNotEmpty" property="rbuilder.build_syntax"/>
+        <Format textKey="id.LABEL"/>
+      </DisplayLabel>
+    </DisplayLabels>
+    <ModuleImports>
+      <ModuleImport moduleId="pasw.rstats">
+        <ComponentImport componentId="rbuilder"/>
+      </ModuleImport>
+    </ModuleImports>
+    <Containers>
+      <Container name="ConsoleOutput"/>
+      <Container name="RModel"/>
+      <Container name="HTMLOutput"/>
+      <Container name="TextOutput"/>
+      <Container name="PMML"/>
+      <Container name="StatXML"/>
+    </Containers>
+    <Properties>
+      <ImportProperties context="rbuilder"/>
+      <Property defaultValue="" name="modelName" valueType="string"/>
+      <Property defaultValue="false" name="modelRename" valueType="boolean"/>
+      <Property defaultValue="NAIVEBAYES %%dependent%% \n%%factors%% %%covariates%%\n%%except%% \n%%forced%%\n%%trainingsample%% \n%%subset%%\n/CRITERIA BINS=%%bins%% MEMALLOCATE=%%memallocate%% TIMER=%%timer%%\n/MISSING USERMISSING=%%missing%% \n%%print%% %%tables%% \n%%save%%." name="script" valueType="string"/>
+      <Property defaultValue="false" name="canScore" valueType="boolean"/>
+      <Property defaultValue="" name="scoringScript" valueType="string"/>
+      <Property name="addOns" valueType="string"/>
+      <Property defaultValue="false" name="isModal" valueType="boolean"/>
+      <Property defaultValue="SYNTAX" name="scriptType" valueType="string"/>
+      <Property defaultValue="MODEL" name="nodeType" valueType="string"/>
+      <Property defaultValue="MODELING" name="paletteType" valueType="string"/>
+      <Property defaultValue="%%ThisValue%%" name="variables_syntax" valueType="string"/>
+      <Property isList="true" name="dependent" valueType="fieldName"/>
+      <Property defaultValue="%%ThisValue%%" name="dependent_syntax" valueType="string"/>
+      <Property isList="true" name="factors" valueType="fieldName"/>
+      <Property defaultValue=" " name="factors_separator" valueType="string"/>
+      <Property defaultValue="BY %%ThisValue%%" name="factors_syntax" valueType="string"/>
+      <Property isList="true" name="covariates" valueType="fieldName"/>
+      <Property defaultValue=" " name="covariates_separator" valueType="string"/>
+      <Property defaultValue="WITH %%ThisValue%%" name="covariates_syntax" valueType="string"/>
+      <Property defaultValue="/FORCE %%ThisValue%%" name="forced_syntax" valueType="string"/>
+      <Property isList="true" name="forced_factors" valueType="fieldName"/>
+      <Property defaultValue="FACTORS=%%ThisValue%%" name="forced_factors_syntax" valueType="string"/>
+      <Property defaultValue=" " name="forced_factors_separator" valueType="string"/>
+      <Property isList="true" name="forced_covariates" valueType="fieldName"/>
+      <Property defaultValue="COVARIATES=%%ThisValue%%" name="forced_covariates_syntax" valueType="string"/>
+      <Property defaultValue=" " name="forced_covariates_separator" valueType="string"/>
+      <Property defaultValue="forced_factors;forced_covariates" name="forced_children" valueType="string"/>
+      <Property isList="true" name="except" valueType="fieldName"/>
+      <Property defaultValue=" " name="except_separator" valueType="string"/>
+      <Property defaultValue="/EXCEPT VARIABLES=%%ThisValue%%" name="except_syntax" valueType="string"/>
+      <Property defaultValue="variable_specification_exclude" name="variable_specification" type="variable_specification"/>
+      <Property defaultValue="%%ThisValue%%" name="variable_specification_syntax" valueType="string"/>
+      <Property defaultValue="Python" name="variable_specification_quoteType" valueType="string"/>
+      <Property defaultValue="%%ThisValue%%" name="output_syntax" valueType="string"/>
+      <Property defaultValue="true" name="print" valueType="boolean"/>
+      <Property defaultValue="/PRINT±/PRINT NONE" name="print_syntax" valueType="string"/>
+      <Property defaultValue="%%ThisValue%%" name="tables_syntax" valueType="string"/>
+      <Property defaultValue="true" name="tables_cps" valueType="boolean"/>
+      <Property defaultValue="CPS±" name="tables_cps_syntax" valueType="string"/>
+      <Property defaultValue="true" name="tables_excluded" valueType="boolean"/>
+      <Property defaultValue="EXCLUDED±" name="tables_excluded_syntax" valueType="string"/>
+      <Property defaultValue="true" name="tables_selected" valueType="boolean"/>
+      <Property defaultValue="SELECTED±" name="tables_selected_syntax" valueType="string"/>
+      <Property defaultValue="true" name="tables_summary" valueType="boolean"/>
+      <Property defaultValue="SUMMARY±" name="tables_summary_syntax" valueType="string"/>
+      <Property defaultValue="true" name="tables_classification" valueType="boolean"/>
+      <Property defaultValue="CLASSIFICATION±" name="tables_classification_syntax" valueType="string"/>
+      <Property defaultValue="display_tables_info;tables_cps;tables_excluded;tables_selected;tables_summary;tables_classification" name="tables_children" valueType="string"/>
+      <Property defaultValue="%%ThisValue%%" name="savetab_syntax" valueType="string"/>
+      <Property defaultValue="/SAVE %%ThisValue%%" name="save_syntax" valueType="string"/>
+      <Property defaultValue="false" name="predval" valueType="boolean"/>
+      <Property defaultValue="PREDVAL±" name="predval_syntax" valueType="string"/>
+      <Property defaultValue="false" name="predprob" valueType="boolean"/>
+      <Property defaultValue="PREDPROB±" name="predprob_syntax" valueType="string"/>
+      <Property defaultValue="" min="1.000000" name="numcats" valueType="double"/>
+      <Property defaultValue="(:%%ThisValue%%)" name="numcats_syntax" valueType="string"/>
+      <Property defaultValue="predval;predprob;numcats" name="save_children" valueType="string"/>
+      <Property defaultValue="%%ThisValue%%" name="options_syntax" valueType="string"/>
+      <Property defaultValue="missing_exclude" name="missing" type="missing"/>
+      <Property defaultValue="%%ThisValue%%" name="missing_syntax" valueType="string"/>
+      <Property defaultValue="false" name="missing_exclude_hasSubGroup"/>
+      <Property defaultValue="EXCLUDE" name="missing_exclude_syntax" valueType="string"/>
+      <Property defaultValue="false" name="missing_include_hasSubGroup"/>
+      <Property defaultValue="INCLUDE" name="missing_include_syntax" valueType="string"/>
+      <Property defaultValue="10" min="2.000000" name="bins" valueType="double"/>
+      <Property defaultValue="%%ThisValue%%" name="bins_syntax" valueType="string"/>
+      <Property defaultValue="1024" min="4.000000" name="memallocate" valueType="double"/>
+      <Property defaultValue="%%ThisValue%%" name="memallocate_syntax" valueType="string"/>
+      <Property defaultValue="5" min="0.000000" name="timer" valueType="double"/>
+      <Property defaultValue="%%ThisValue%%" name="timer_syntax" valueType="string"/>
+      <Property defaultValue="trainingsample_none" name="trainingsample" type="trainingsample"/>
+      <Property defaultValue="/TRAININGSAMPLE %%ThisValue%%" name="trainingsample_syntax" valueType="string"/>
+      <Property defaultValue="false" name="trainingsample_none_hasSubGroup"/>
+      <Property defaultValue="true" name="trainingsample_pct_hasSubGroup"/>
+      <Property defaultValue="" max="100.000000" min="0.100000" name="trainingsample_pct_val" valueType="double"/>
+      <Property defaultValue="%%ThisValue%%" name="trainingsample_pct_val_syntax" valueType="string"/>
+      <Property defaultValue="PERCENT=%%ThisValue%%" name="trainingsample_pct_syntax" valueType="string"/>
+      <Property defaultValue="subset_max" name="subset" type="subset"/>
+      <Property defaultValue="/SUBSET %%ThisValue%%" name="subset_syntax" valueType="string"/>
+      <Property defaultValue="true" name="subset_max_hasSubGroup"/>
+      <Property defaultValue="true" name="maxsize_auto" valueType="boolean"/>
+      <Property defaultValue="AUTO±" name="maxsize_auto_syntax" valueType="string"/>
+      <Property defaultValue="" min="1.000000" name="maxsize_specify" valueType="double"/>
+      <Property defaultValue="%%ThisValue%%" name="maxsize_specify_syntax" valueType="string"/>
+      <Property defaultValue="bestsubset_testdata" name="bestsubset" type="bestsubset"/>
+      <Property defaultValue="(BESTSUBSET=PSEUDOBIC)" name="bestsubset_pseudobic_syntax" valueType="string"/>
+      <Property defaultValue="(BESTSUBSET=TESTDATA)" name="bestsubset_testdata_syntax" valueType="string"/>
+      <Property defaultValue="%%ThisValue%%" name="bestsubset_syntax" valueType="string"/>
+      <Property defaultValue="Python" name="bestsubset_quoteType" valueType="string"/>
+      <Property defaultValue="MAXSIZE=%%ThisValue%%" name="subset_max_syntax" valueType="string"/>
+      <Property defaultValue="true" name="subset_exact_hasSubGroup"/>
+      <Property defaultValue="" min="1.000000" name="exactsize_specify" valueType="double"/>
+      <Property defaultValue="%%ThisValue%%" name="exactsize_specify_syntax" valueType="string"/>
+      <Property defaultValue="EXACTSIZE=%%ThisValue%%" name="subset_exact_syntax" valueType="string"/>
+      <Property defaultValue="false" name="subset_none_hasSubGroup"/>
+      <Property defaultValue="NOSELECTION " name="subset_none_syntax" valueType="string"/>
+    </Properties>
+    <UserInterface helpLink="[HTMLHelp]Naive_Bayes_Classifier.htm" swingPeerClass="com.spss.shared.custom_gui.ui_builder.peers.RStatsUIPeer">
+      <Tabs>
+        <Tab resourceKey="variables">
+          <PropertiesPanel>
+            <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+            <FieldAllocatorPanel id="field_allocator">
+              <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+              <SourceFieldsBrowser copyFields="false" measures="[nominal ordinal continuous]" resourceKey="source_vars" showLabel="true" storage="[real integer date time string]">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridHeight="15" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+              </SourceFieldsBrowser>
+              <TargetFieldChooserControl alignment="center" labelAbove="true" maxFields="1" measures="[nominal ordinal]" property="dependent" resourceKey="dependent" showLabel="true" storage="[real integer date time string]">
+                <Layout anchor="northwest" columnWeight="1.0" fill="horizontal" gridColumn="2" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="0.0"/>
+                <Required borderTitleKey="dependent.WARNING">
+                  <ControlCondition control="dependent" op="isEmpty" value="true"/>
+                </Required>
+              </TargetFieldChooserControl>
+              <TargetFieldChooserControl alignment="center" labelAbove="true" maxVisible="3" measures="[nominal ordinal continuous]" property="factors" resourceKey="factors" showLabel="true" storage="[real integer date time string]">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="2" gridHeight="1" gridRow="4" gridWidth="1" rowWeight="1.0"/>
+                <Enabled>
+                  <ControlCondition control="variable_specification" op="equals" value="variable_specification_include"/>
+                </Enabled>
+              </TargetFieldChooserControl>
+              <TargetFieldChooserControl alignment="center" labelAbove="true" maxVisible="3" measures="[nominal ordinal continuous]" property="covariates" resourceKey="covariates" showLabel="true" storage="[real integer date time]">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="2" gridHeight="1" gridRow="5" gridWidth="1" rowWeight="1.0"/>
+                <Enabled>
+                  <ControlCondition control="variable_specification" op="equals" value="variable_specification_include"/>
+                </Enabled>
+              </TargetFieldChooserControl>
+              <PropertiesPanel borderTitleKey="forced" borderType="etched" id="forced">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="2" gridHeight="1" gridRow="6" gridWidth="1" rowWeight="1.0"/>
+                <MultiFieldChooserControl excludes="[dependent]" labelAbove="true" measures="[nominal ordinal continuous]" property="forced_factors" resourceKey="forced_factors" showLabel="true" storage="[real integer date time string]">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="horizontal" gridColumn="0" gridRow="0" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="subset" op="notEquals" value="subset_none"/>
+                  </Enabled>
+                </MultiFieldChooserControl>
+                <MultiFieldChooserControl excludes="[dependent]" labelAbove="true" measures="[nominal ordinal continuous]" property="forced_covariates" resourceKey="forced_covariates" showLabel="true" storage="[real integer date time]">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="horizontal" gridColumn="0" gridRow="3" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="subset" op="notEquals" value="subset_none"/>
+                  </Enabled>
+                </MultiFieldChooserControl>
+                <Enabled>
+                  <ControlCondition control="subset" op="notEquals" value="subset_none"/>
+                </Enabled>
+              </PropertiesPanel>
+              <TargetFieldChooserControl alignment="center" labelAbove="true" maxVisible="3" measures="[nominal ordinal continuous]" property="except" resourceKey="except" showLabel="true" storage="[real integer date time string]">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="2" gridHeight="1" gridRow="3" gridWidth="1" rowWeight="1.0"/>
+                <Enabled>
+                  <ControlCondition control="variable_specification" op="equals" value="variable_specification_exclude"/>
+                </Enabled>
+              </TargetFieldChooserControl>
+              <ComboBoxControl editable="false" labelAbove="true" property="variable_specification" resourceKey="variable_specification">
+                <Layout anchor="northwest" columnWeight="1.0" fill="horizontal" gridColumn="2" gridHeight="1" gridRow="1" gridWidth="1" rowWeight="0.0"/>
+              </ComboBoxControl>
+            </FieldAllocatorPanel>
+          </PropertiesPanel>
+        </Tab>
+        <Tab resourceKey="output">
+          <PropertiesPanel>
+            <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+            <PropertiesPanel id="leftPanel">
+              <Layout anchor="firstLineStart" columnWeight="1.0" fill="horizontal" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+              <CheckBoxControl labelAbove="false" property="print" resourceKey="print">
+                <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="0" gridWidth="1" rowWeight="0.0"/>
+              </CheckBoxControl>
+              <PropertiesPanel borderTitleKey="tables" borderType="etched" id="tables">
+                <Layout anchor="northwest" columnWeight="0.0" fill="both" gridColumn="0" gridRow="1" gridWidth="1" rowWeight="1.0"/>
+                <StaticText textKey="display_tables_info.LABEL">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="horizontal" gridColumn="0" gridRow="0" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="print" op="equals" value="true"/>
+                  </Enabled>
+                </StaticText>
+                <CheckBoxControl labelAbove="false" property="tables_cps" resourceKey="tables_cps">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="3" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="print" op="equals" value="true"/>
+                  </Enabled>
+                </CheckBoxControl>
+                <CheckBoxControl labelAbove="false" property="tables_excluded" resourceKey="tables_excluded">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="6" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="print" op="equals" value="true"/>
+                  </Enabled>
+                </CheckBoxControl>
+                <CheckBoxControl labelAbove="false" property="tables_selected" resourceKey="tables_selected">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="9" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="print" op="equals" value="true"/>
+                  </Enabled>
+                </CheckBoxControl>
+                <CheckBoxControl labelAbove="false" property="tables_summary" resourceKey="tables_summary">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="12" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="print" op="equals" value="true"/>
+                  </Enabled>
+                </CheckBoxControl>
+                <CheckBoxControl labelAbove="false" property="tables_classification" resourceKey="tables_classification">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="15" gridWidth="1" rowWeight="0.0"/>
+                  <Enabled>
+                    <ControlCondition control="print" op="equals" value="true"/>
+                  </Enabled>
+                </CheckBoxControl>
+                <Enabled>
+                  <ControlCondition control="print" op="equals" value="true"/>
+                </Enabled>
+              </PropertiesPanel>
+            </PropertiesPanel>
+          </PropertiesPanel>
+        </Tab>
+        <Tab resourceKey="savetab">
+          <PropertiesPanel>
+            <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+            <PropertiesPanel id="leftPanel">
+              <Layout anchor="firstLineStart" columnWeight="1.0" fill="horizontal" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+              <PropertiesPanel borderTitleKey="save" borderType="etched" id="save">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+                <CheckBoxControl labelAbove="false" property="predval" resourceKey="predval">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="0" gridWidth="1" rowWeight="0.0"/>
+                </CheckBoxControl>
+                <CheckBoxControl labelAbove="false" property="predprob" resourceKey="predprob">
+                  <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="3" gridWidth="1" rowWeight="0.0"/>
+                </CheckBoxControl>
+                <PropertiesPanel>
+                  <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridRow="6" gridWidth="1" rowWeight="0.0"/>
+                  <TextBoxControl labelAbove="false" property="numcats" resourceKey="numcats">
+                    <Enabled>
+                      <ControlCondition control="predprob" op="equals" value="true"/>
+                    </Enabled>
+                  </TextBoxControl>
+                </PropertiesPanel>
+              </PropertiesPanel>
+            </PropertiesPanel>
+          </PropertiesPanel>
+        </Tab>
+        <Tab resourceKey="options">
+          <PropertiesPanel>
+            <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+            <PropertiesPanel id="leftPanel">
+              <Layout anchor="firstLineStart" columnWeight="1.0" fill="horizontal" gridColumn="0" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+              <PropertiesPanel borderTitleKey="missing" borderType="etched">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+                <RadioButtonGroupControl labelAbove="true" property="missing" resourceKey="missing" rows="2" useSubPanel="false">
+                  <RadioButton value="missing_exclude"/>
+                  <RadioButton value="missing_include"/>
+                  <Layout gridHeight="4" gridWidth="1" rowIncrement="1"/>
+                </RadioButtonGroupControl>
+              </PropertiesPanel>
+              <PropertiesPanel>
+                <Layout anchor="northwest" columnWeight="0.0" fill="both" gridColumn="0" gridRow="4" gridWidth="1" rowWeight="1.0"/>
+                <SpinnerControl labelAbove="false" property="bins" resourceKey="bins" showLabel="true" stepSize="1.000000"/>
+              </PropertiesPanel>
+              <PropertiesPanel>
+                <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="3" gridWidth="1" rowWeight="0.0"/>
+                <TextBoxControl columns="5" labelAbove="false" property="memallocate" resourceKey="memallocate"/>
+              </PropertiesPanel>
+              <PropertiesPanel>
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridRow="2" gridWidth="1" rowWeight="0.0"/>
+                <SpinnerControl labelAbove="false" property="timer" resourceKey="timer" showLabel="true" stepSize="1.000000"/>
+              </PropertiesPanel>
+              <PropertiesPanel borderTitleKey="trainingsample" borderType="etched">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="0" gridRow="1" gridWidth="1" rowWeight="1.0"/>
+                <RadioButtonGroupControl labelAbove="true" property="trainingsample" resourceKey="trainingsample" rows="2" useSubPanel="false">
+                  <RadioButton value="trainingsample_none"/>
+                  <RadioButton value="trainingsample_pct">
+                    <PropertiesPanel>
+                      <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="0" gridWidth="1" leftIndent="4" rowWeight="1.0"/>
+                      <TextBoxControl columns="5" labelAbove="false" property="trainingsample_pct_val" resourceKey="trainingsample_pct_val">
+                        <Required borderTitleKey="trainingsample_pct_val.WARNING">
+                          <ControlCondition control="trainingsample_pct_val" op="isEmpty" value="true"/>
+                        </Required>
+                        <Enabled>
+                          <ControlCondition control="trainingsample" op="equals" value="trainingsample_pct"/>
+                        </Enabled>
+                      </TextBoxControl>
+                    </PropertiesPanel>
+                  </RadioButton>
+                  <Layout gridHeight="4" gridWidth="1" rowIncrement="1"/>
+                </RadioButtonGroupControl>
+              </PropertiesPanel>
+            </PropertiesPanel>
+            <PropertiesPanel id="middlePanel">
+              <Layout anchor="firstLineStart" columnWeight="1.0" fill="horizontal" gridColumn="1" gridHeight="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+              <PropertiesPanel borderTitleKey="subset" borderType="etched">
+                <Layout anchor="northwest" columnWeight="1.0" fill="both" gridColumn="1" gridRow="0" gridWidth="1" rowWeight="1.0"/>
+                <RadioButtonGroupControl labelAbove="true" property="subset" resourceKey="subset" rows="3" useSubPanel="false">
+                  <RadioButton value="subset_max">
+                    <CheckBoxControl labelAbove="false" property="maxsize_auto" resourceKey="maxsize_auto">
+                      <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="0" gridWidth="1" leftIndent="4" rowWeight="0.0"/>
+                      <Enabled>
+                        <ControlCondition control="subset" op="equals" value="subset_max"/>
+                      </Enabled>
+                    </CheckBoxControl>
+                    <PropertiesPanel>
+                      <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="3" gridWidth="1" leftIndent="4" rowWeight="0.0"/>
+                      <TextBoxControl columns="5" labelAbove="false" property="maxsize_specify" resourceKey="maxsize_specify">
+                        <Required borderTitleKey="maxsize_specify.WARNING">
+                          <ControlCondition control="maxsize_specify" op="isEmpty" value="true"/>
+                        </Required>
+                        <Enabled>
+                          <And>
+                            <ControlCondition control="maxsize_auto" op="equals" value="false"/>
+                            <ControlCondition control="subset" op="equals" value="subset_max"/>
+                          </And>
+                        </Enabled>
+                      </TextBoxControl>
+                    </PropertiesPanel>
+                    <ComboBoxControl editable="false" labelAbove="true" property="bestsubset" resourceKey="bestsubset">
+                      <Layout anchor="northwest" columnWeight="1.0" fill="horizontal" gridColumn="0" gridRow="5" gridWidth="1" leftIndent="4" rowWeight="1.0"/>
+                      <Enabled>
+                        <And>
+                          <ControlCondition control="trainingsample" op="notEquals" value="trainingsample_none"/>
+                          <ControlCondition control="subset" op="equals" value="subset_max"/>
+                        </And>
+                      </Enabled>
+                    </ComboBoxControl>
+                  </RadioButton>
+                  <RadioButton value="subset_exact">
+                    <PropertiesPanel>
+                      <Layout anchor="northwest" columnWeight="1.0" fill="none" gridColumn="0" gridRow="0" gridWidth="1" leftIndent="4" rowWeight="1.0"/>
+                      <TextBoxControl columns="5" labelAbove="false" property="exactsize_specify" resourceKey="exactsize_specify">
+                        <Required borderTitleKey="exactsize_specify.WARNING">
+                          <ControlCondition control="exactsize_specify" op="isEmpty" value="true"/>
+                        </Required>
+                        <Enabled>
+                          <ControlCondition control="subset" op="equals" value="subset_exact"/>
+                        </Enabled>
+                      </TextBoxControl>
+                    </PropertiesPanel>
+                  </RadioButton>
+                  <RadioButton value="subset_none"/>
+                  <Layout gridHeight="6" gridWidth="1" rowIncrement="1"/>
+                </RadioButtonGroupControl>
+              </PropertiesPanel>
+            </PropertiesPanel>
+          </PropertiesPanel>
+        </Tab>
+      </Tabs>
+    </UserInterface>
+    <OutputDataModel mode="replace"/>
+    <Execution>
+      <Outputs>
+        <OutputContainer id="C1" outputId="C1" targetContainer="ConsoleOutput"/>
+        <OutputContainer id="C2" outputId="C2" targetContainer="RModel"/>
+        <OutputContainer id="C3" outputId="C3" targetContainer="HTMLOutput"/>
+        <OutputContainer id="C4" outputId="C4" targetContainer="TextOutput"/>
+        <OutputContainer id="C5" outputId="C5" targetContainer="PMML"/>
+        <OutputContainer id="C6" outputId="C6" targetContainer="StatXML"/>
+      </Outputs>
+      <RunComponent context="rbuilder" id="1">
+        <OutputContainer containerName="ConsoleOutput" id="C1" targetContainer="ConsoleOutput"/>
+        <OutputContainer containerName="RModel" id="C2" targetContainer="RModel"/>
+        <OutputContainer containerName="HTMLOutput" id="C3" targetContainer="HTMLOutput"/>
+        <OutputContainer containerName="TextOutput" id="C4" targetContainer="TextOutput"/>
+        <OutputContainer containerName="PMML" id="C5" targetContainer="PMML"/>
+        <OutputContainer containerName="StatXML" id="C6" targetContainer="StatXML"/>
+      </RunComponent>
+    </Execution>
+    <Validations>
+      <Validation messageType="error" property="dependent">
+        <Format textKey="dependent.errorMsg"/>
+        <Constraints>
+          <Constraint>
+            <PropertyCondition op="isNotEmpty" property="dependent" value="true"/>
+          </Constraint>
+        </Constraints>
+      </Validation>
+      <Validation messageType="error" property="trainingsample_pct_val">
+        <Format textKey="trainingsample_pct_val.errorMsg"/>
+        <Constraints>
+          <Constraint>
+            <PropertyCondition op="isNotEmpty" property="trainingsample_pct_val" value="true"/>
+          </Constraint>
+        </Constraints>
+      </Validation>
+      <Validation messageType="error" property="maxsize_specify">
+        <Format textKey="maxsize_specify.errorMsg"/>
+        <Constraints>
+          <Constraint>
+            <PropertyCondition op="isNotEmpty" property="maxsize_specify" value="true"/>
+          </Constraint>
+        </Constraints>
+      </Validation>
+      <Validation messageType="error" property="exactsize_specify">
+        <Format textKey="exactsize_specify.errorMsg"/>
+        <Constraints>
+          <Constraint>
+            <PropertyCondition op="isNotEmpty" property="exactsize_specify" value="true"/>
+          </Constraint>
+        </Constraints>
+      </Validation>
+    </Validations>
+  </Feature>
+</Extension>

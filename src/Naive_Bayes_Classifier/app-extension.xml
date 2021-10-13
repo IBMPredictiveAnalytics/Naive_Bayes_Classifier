@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><!--***********************************************************************--><!----><!--Licensed Materials - Property of IBM--><!----><!--IBM SPSS Products: Modeler Common--><!----><!--(C) Copyright IBM Corp. 1989, 2016--><!----><!--US Government Users Restricted Rights - Use, duplication or disclosure--><!--restricted by GSA ADP Schedule Contract with IBM Corp.--><!----><!--***********************************************************************--><AppExtension debug="false" version="8.0" xmlns="http://xml.spss.com/pasw/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.spss.com/pasw/extension http://xml.spss.com/pasw/extension/AppExtension.xsd">
+  <ExtensionDetails copyright="(c) 2016 SPSS, Inc." description="Application extension for PySpark" id="Naive_Bayes_Classifier" label="Naive Bayes" provider="IBM SPSS, Inc." providerTag="SPSS"/>
+  <ExtensionName name="extension"/>
+  <Application name="statistics">
+    <AppFeature dialogTitleKey="Naive_Bayes_Classifier" featureId="Naive_Bayes_Classifier">
+      <Validations/>
+      <AppDetails>
+        <ProcedureInfo titleKey="Naive_Bayes_Classifier_proc_title"/>
+        <AppUserInterface>
+          <Menus>
+            <MenuItem actionIDToName="" featureId="Naive_Bayes_Classifier" imagePath="defaultExtensionDialog.png" installToGlobalCustomMenu="false" isSpssNative="false" menuFrame="all" menuVersion="2" offset="7" previousId="STATS_CLUS_SIL" resourceKey="Naive_Bayes_Classifier" separatorAfter="none" separatorBefore="false" showIcon="false" spssMenu="Analyze.analyze_classify"/>
+          </Menus>
+        </AppUserInterface>
+        <SyntaxGeneration syntaxTemplate="NAIVEBAYES %%dependent_syntax%% \n%%factors_syntax%% %%covariates_syntax%%\n%%except_syntax%% \n%%forced_syntax%%\n%%trainingsample_syntax%% \n%%subset_syntax%%\n/CRITERIA BINS=%%bins_syntax%% MEMALLOCATE=%%memallocate_syntax%% TIMER=%%timer_syntax%%\n/MISSING USERMISSING=%%missing_syntax%% \n%%print_syntax%% %%tables_syntax%% \n%%save_syntax%%.">
+          <SyntaxItem name="dependent_syntax" syntax="%%dependent%%">
+            <SyntaxCondition condition="isNotEmpty" operand="true" property="dependent"/>
+          </SyntaxItem>
+          <SyntaxProperty name="dependent" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="factors_syntax" syntax="BY %%factors%%">
+            <And>
+              <SyntaxCondition condition="equals" operand="variable_specification_include" property="variable_specification"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="factors"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty delimiter=" " name="factors" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="covariates_syntax" syntax="WITH %%covariates%%">
+            <And>
+              <SyntaxCondition condition="equals" operand="variable_specification_include" property="variable_specification"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="covariates"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty delimiter=" " name="covariates" syntax="%%ThisValue%%"/>
+          <SyntaxProperty name="forced" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="forced_syntax" syntax="%%forced_syntax_with_or%%">
+            <SyntaxCondition condition="notEquals" operand="subset_none" property="subset"/>
+          </SyntaxItem>
+          <SyntaxItem name="forced_factors_syntax" syntax="FACTORS=%%forced_factors%%">
+            <SyntaxCondition condition="isNotEmpty" operand="true" property="forced_factors"/>
+          </SyntaxItem>
+          <SyntaxProperty delimiter=" " name="forced_factors" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="forced_covariates_syntax" syntax="COVARIATES=%%forced_covariates%%">
+            <SyntaxCondition condition="isNotEmpty" operand="true" property="forced_covariates"/>
+          </SyntaxItem>
+          <SyntaxProperty delimiter=" " name="forced_covariates" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="forced_syntax_with_or" syntax="/FORCE %%forced_factors_syntax%% %%forced_covariates_syntax%% ">
+            <Or>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="forced_factors"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="forced_covariates"/>
+            </Or>
+          </SyntaxItem>
+          <SyntaxItem name="except_syntax" syntax="/EXCEPT VARIABLES=%%except%%">
+            <And>
+              <SyntaxCondition condition="equals" operand="variable_specification_exclude" property="variable_specification"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="except"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty delimiter=" " name="except" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="variable_specification_syntax" syntax="">
+            <SyntaxCondition condition="equals" operand="variable_specification_exclude" property="variable_specification"/>
+          </SyntaxItem>
+          <SyntaxItem name="variable_specification_syntax" syntax="">
+            <SyntaxCondition condition="equals" operand="variable_specification_include" property="variable_specification"/>
+          </SyntaxItem>
+          <SyntaxProperty name="variable_specification" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="print_syntax" syntax="/PRINT">
+            <SyntaxCondition condition="equals" operand="true" property="print"/>
+          </SyntaxItem>
+          <SyntaxItem name="print_syntax" syntax="/PRINT NONE">
+            <SyntaxCondition condition="equals" operand="false" property="print"/>
+          </SyntaxItem>
+          <SyntaxProperty name="print" syntax="%%ThisValue%%"/>
+          <SyntaxProperty name="tables" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="tables_syntax" syntax="%%display_tables_info_syntax%% %%tables_cps_syntax%% %%tables_excluded_syntax%% %%tables_selected_syntax%% %%tables_summary_syntax%% %%tables_classification_syntax%% ">
+            <SyntaxCondition condition="equals" operand="true" property="print"/>
+          </SyntaxItem>
+          <SyntaxItem name="display_tables_info_syntax" syntax="%%display_tables_info%%"/>
+          <SyntaxProperty name="display_tables_info" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="tables_cps_syntax" syntax="CPS">
+            <And>
+              <SyntaxCondition condition="equals" operand="true" property="print"/>
+              <SyntaxCondition condition="equals" operand="true" property="tables_cps"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="tables_cps" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="tables_excluded_syntax" syntax="EXCLUDED">
+            <And>
+              <SyntaxCondition condition="equals" operand="true" property="print"/>
+              <SyntaxCondition condition="equals" operand="true" property="tables_excluded"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="tables_excluded" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="tables_selected_syntax" syntax="SELECTED">
+            <And>
+              <SyntaxCondition condition="equals" operand="true" property="print"/>
+              <SyntaxCondition condition="equals" operand="true" property="tables_selected"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="tables_selected" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="tables_summary_syntax" syntax="SUMMARY">
+            <And>
+              <SyntaxCondition condition="equals" operand="true" property="print"/>
+              <SyntaxCondition condition="equals" operand="true" property="tables_summary"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="tables_summary" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="tables_classification_syntax" syntax="CLASSIFICATION">
+            <And>
+              <SyntaxCondition condition="equals" operand="true" property="print"/>
+              <SyntaxCondition condition="equals" operand="true" property="tables_classification"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="tables_classification" syntax="%%ThisValue%%"/>
+          <SyntaxProperty name="save" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="save_syntax" syntax="%%save_syntax_with_or%%"/>
+          <SyntaxItem name="predval_syntax" syntax="PREDVAL">
+            <SyntaxCondition condition="equals" operand="true" property="predval"/>
+          </SyntaxItem>
+          <SyntaxProperty name="predval" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="predprob_syntax" syntax="PREDPROB">
+            <SyntaxCondition condition="equals" operand="true" property="predprob"/>
+          </SyntaxItem>
+          <SyntaxProperty name="predprob" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="numcats_syntax" syntax="(:%%numcats%%)">
+            <And>
+              <SyntaxCondition condition="equals" operand="true" property="predprob"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="numcats"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="numcats" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="save_syntax_with_or" syntax="/SAVE %%predval_syntax%% %%predprob_syntax%% %%numcats_syntax%% ">
+            <Or>
+              <SyntaxCondition condition="equals" operand="true" property="predval"/>
+              <SyntaxCondition condition="equals" operand="true" property="predprob"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="numcats"/>
+            </Or>
+          </SyntaxItem>
+          <SyntaxProperty name="missing" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="missing_syntax" syntax="EXCLUDE">
+            <SyntaxCondition condition="equals" operand="missing_exclude" property="missing"/>
+          </SyntaxItem>
+          <SyntaxItem name="missing_syntax" syntax="INCLUDE">
+            <SyntaxCondition condition="equals" operand="missing_include" property="missing"/>
+          </SyntaxItem>
+          <SyntaxItem name="bins_syntax" syntax="%%bins%%">
+            <SyntaxCondition condition="isNotEmpty" operand="true" property="bins"/>
+          </SyntaxItem>
+          <SyntaxProperty name="bins" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="memallocate_syntax" syntax="%%memallocate%%">
+            <SyntaxCondition condition="isNotEmpty" operand="true" property="memallocate"/>
+          </SyntaxItem>
+          <SyntaxProperty name="memallocate" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="timer_syntax" syntax="%%timer%%">
+            <SyntaxCondition condition="isNotEmpty" operand="true" property="timer"/>
+          </SyntaxItem>
+          <SyntaxProperty name="timer" syntax="%%ThisValue%%"/>
+          <SyntaxProperty name="trainingsample" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="trainingsample_syntax" syntax="/TRAININGSAMPLE ">
+            <SyntaxCondition condition="equals" operand="trainingsample_none" property="trainingsample"/>
+          </SyntaxItem>
+          <SyntaxItem name="trainingsample_syntax" syntax="/TRAININGSAMPLE PERCENT=%%trainingsample_pct_val_syntax%% ">
+            <SyntaxCondition condition="equals" operand="trainingsample_pct" property="trainingsample"/>
+          </SyntaxItem>
+          <SyntaxItem name="trainingsample_pct_val_syntax" syntax="%%trainingsample_pct_val%%">
+            <And>
+              <SyntaxCondition condition="equals" operand="trainingsample_pct" property="trainingsample"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="trainingsample_pct_val"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="trainingsample_pct_val" syntax="%%ThisValue%%"/>
+          <SyntaxProperty name="subset" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="subset_syntax" syntax="/SUBSET MAXSIZE=%%maxsize_auto_syntax%% %%maxsize_specify_syntax%% %%bestsubset_syntax%% ">
+            <SyntaxCondition condition="equals" operand="subset_max" property="subset"/>
+          </SyntaxItem>
+          <SyntaxItem name="maxsize_auto_syntax" syntax="AUTO">
+            <And>
+              <SyntaxCondition condition="equals" operand="subset_max" property="subset"/>
+              <SyntaxCondition condition="equals" operand="true" property="maxsize_auto"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="maxsize_auto" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="maxsize_specify_syntax" syntax="%%maxsize_specify%%">
+            <And>
+              <SyntaxCondition condition="equals" operand="false" property="maxsize_auto"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="maxsize_specify"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="maxsize_specify" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="bestsubset_syntax" syntax="(BESTSUBSET=PSEUDOBIC)">
+            <And>
+              <SyntaxCondition condition="notEquals" operand="trainingsample_none" property="trainingsample"/>
+              <SyntaxCondition condition="equals" operand="bestsubset_pseudobic" property="bestsubset"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxItem name="bestsubset_syntax" syntax="(BESTSUBSET=TESTDATA)">
+            <And>
+              <SyntaxCondition condition="notEquals" operand="trainingsample_none" property="trainingsample"/>
+              <SyntaxCondition condition="equals" operand="bestsubset_testdata" property="bestsubset"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="bestsubset" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="subset_syntax" syntax="/SUBSET EXACTSIZE=%%exactsize_specify_syntax%% ">
+            <SyntaxCondition condition="equals" operand="subset_exact" property="subset"/>
+          </SyntaxItem>
+          <SyntaxItem name="exactsize_specify_syntax" syntax="%%exactsize_specify%%">
+            <And>
+              <SyntaxCondition condition="equals" operand="subset_exact" property="subset"/>
+              <SyntaxCondition condition="isNotEmpty" operand="true" property="exactsize_specify"/>
+            </And>
+          </SyntaxItem>
+          <SyntaxProperty name="exactsize_specify" syntax="%%ThisValue%%"/>
+          <SyntaxItem name="subset_syntax" syntax="/SUBSET NOSELECTION ">
+            <SyntaxCondition condition="equals" operand="subset_none" property="subset"/>
+          </SyntaxItem>
+        </SyntaxGeneration>
+      </AppDetails>
+    </AppFeature>
+  </Application>
+</AppExtension>

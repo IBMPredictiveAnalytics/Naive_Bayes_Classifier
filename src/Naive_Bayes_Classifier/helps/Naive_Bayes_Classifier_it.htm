@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Naive Bayes</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Naive Bayes</h1>
+<p>L'estensione del classificatore Naive Bayes è adatta al modello di classificazione Naive Bayes per una variabile dipendente categoriale. È possibile specificare se vengono utilizzati tutti i predittori disponibili o se la procedura seleziona i predittori migliori. L'estensione può essere anche essere utilizzata per la selezione dei predittori senza classificazione.</p>
+<h2>Variabili</h2>
+<p><span class="runinhead">Variabile dipendente.</span> Specificare la variabile numerica o stringa da analizzare.</p>
+<p><span class="runinhead">Metodo di specifica variabile.</span> È possibile specificare una serie di variabili da escludere dall'analisi oppure l'insieme di fattori e covariate da includere nell'analisi. Se non si specificano variabili da escludere o covariate o fattori candidati,vengono incluse tutte le variabili (tranne la variabile dipendente e la variabile peso).</p>
+<p><span class="runinhead">Variabili da escludere.</span> Specificare le variabili da escludere dall'analisi. Per impostazione predefinita, la procedura seleziona i predittori migliori dalle variabili rimanenti (la variabile dipendente e la variabile peso sono sempre escluse).</p>
+<p><span class="runinhead">Fattori e covariate.</span> Specificare i fattori e le covariate da includere nell'analisi. I fattori sono trattati come variabili categoriali e possono avere valori numerici o stringa. Le covariate sono trattate come variabili di scala e devono essere numeriche. Per impostazione predefinita, la procedura seleziona i predittori migliori dall'insieme specificato di fattori e covariate.</p>
+<p><span class="runinhead">Variabili forzate.</span> È possibile specificare i fattori e le covariate che vengono sempre utilizzati nel modello di classificazione. I fattori forzati sono trattati come variabili categoriali e possono avere valori numerici o stringa. Le covariate forzate sono trattate come variabili di scala e devono essere numeriche.</p>
+<h2>Output</h2>
+<p><span class="runinhead">Riepilogo elaborazione casi.</span> Riepiloga il numero di casi inclusi ed esclusi nell'analisi.</p>
+<p><span class="runinhead">Predittori esclusi.</span> Elenca i predittori esclusi a causa di valori mancanti o costanti per tutti i casi. I predittori esclusi vengono visualizzati in base al tipo (categoriale o di scala).</p>
+<p><span class="runinhead">Predittori selezionati.</span> Visualizza i predittori selezionati in base al tipo (categoriale o di scala).</p>
+<p><span class="runinhead">Riepilogo dei sottoinsiemi di predittori.</span> Visualizza un riepilogo della sequenza di sottoinsiemi di predittori.</p>
+<p><span class="runinhead">Classificazione dei casi.</span> Visualizza il numero di casi classificati correttamente e non correttamente per ogni categoria di variabile dipendente. Se vengono definiti i dati di test, vengono forniti i risultati di classificazione per i campioni di addestramento e test. Se non vengono definiti i dati di test, i risultati di classificazione vengono forniti solo per il campione di addestramento.</p>
+<h2>Salva</h2>
+<p><span class="runinhead">Valore previsto e probabilità previste.</span> È possibile salvare i valori previsti e le probabilità previste come nuove variabili nel dataset attivo. Il valore previsto è la categoria di variabile dipendente con la più alta probabilità a posteriori come stimato dal modello Naive Bayes. Vengono salvate le probabilità previste delle prime N categorie della variabile dipendente, dove N è 25 per impostazione predefinita.</p>
+<h2>Opzioni</h2>
+<p><span class="runinhead">Valori mancanti definiti dall'utente per le variabili categoriali.</span> Controlla se i valori mancanti dell'utente per le variabili categoriali sono esclusi o inclusi nell'analisi. I valori mancanti dell'utente per le variabili di scala vengono sempre esclusi. I valori mancanti del sistema per qualsiasi variabile vengono sempre esclusi.</p>
+<p><span class="runinhead">Campione di addestramento.</span> È possibile eseguire il partizionamento del dataset attivo in campioni di addestramento e test specificando una percentuale di casi selezionati casualmente da assegnare al campione di addestramento.</p>
+<p><span class="runinhead">Selezione del predittore.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Seleziona il sottoinsieme migliore dalla sequenza di sottoinsiemi</I>. Per impostazione predefinita, la procedura Naive Bayes seleziona il sottoinsieme migliore di predittori da una sequenza di sottoinsiemi, con un numero crescente di predittori in ciascun sottoinsieme. La procedura determina automaticamente la dimensione del sottoinsieme più grande ma è anche possibile specificare una dimensione massima di sottoinsieme esplicita. Quando viene eseguito il partizionamento del dataset attivo in campioni di addestramento e test, è possibile scegliere se il sottoinsieme migliore viene determinato da un criterio pseudo-BIC basato sul campione di addestramento oppure un criterio di dati di test basato su un campione di test.</p>
+<p class="bullet">&bull;&nbsp;<I>Seleziona il sottoinsieme migliore della dimensione specificata</I>. Questa scelta specifica il numero esatto di predittori da includere nel sottoinsieme migliore.</p>
+<p class="bullet">&bull;&nbsp;<I>Utilizza tutti i predittori specificati</I>. Questa scelta indica che tutti i predittori specificati sono inclusi nel sottoinsieme finale ed è utile per la creazione dei modelli senza la selezione di predittori.</p>
+<p><span class="runinhead">Limite di tempo.</span> Specifica il numero massimo di minuti durante il quale può essere eseguita la procedura Naive Bayes. Se il limite di tempo viene superato, la procedura viene terminata e non vengono forniti risultati. La specifica di un valore 0 disattiva il timer.</p>
+<p><span class="runinhead">Memoria massima per archiviare i dati di addestramento.</span> Specifica la quantità massima di memoria in megabyte (MB) utilizzata dalla procedura Naive Bayes per memorizzare i record di dati di addestramento quando si calcola il logaritmo della verosimiglianza medio. Se la quantità di memoria necessaria per memorizzare i record è maggiore, vengono utilizzati invece dei dati simulati.</p>
+<p><span class="runinhead">Numero di bin per i predittori di scala.</span> Specifica il numero di bin da utilizzare quando si divide il dominio di un predittore di scala in bin di larghezza uguale.</p>
+<h2>Funzioni aggiuntive</h2>
+<p>Questa finestra di dialogo genera la sintassi per il comando NAIVEBAYES. Nella sintassi NAIVEBAYES è possibile specificare una variabile che esegue il partizionamento del dataset in campioni di addestramento e test. È inoltre possibile salvare il modello Naive Bayes in un file XML in modo da poter calcolare il punteggio di nuovi dati con il modello.</p>
+<p>Per ulteriori informazioni sulla procedura Naive Bayes, consultare la documentazione relativa al comando NAIVEBAYES nel sistema di guida di IBM SPSS Statistics.</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

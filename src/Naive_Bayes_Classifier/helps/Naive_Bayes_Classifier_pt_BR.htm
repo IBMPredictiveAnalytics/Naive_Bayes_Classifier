@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Naive Bayes</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Naive Bayes</h1>
+<p>A extensão do classificador Naive Bayes ajusta-se ao modelo de classificação Naive Bayes para uma variável dependente categórica. É possível especificar se todos os preditores disponíveis serão usados ou se o procedimento selecionará os melhores preditores. Também é possível usar a extensão para a seleção do preditor sem classificação.</p>
+<h2>Variáveis</h2>
+<p><span class="runinhead">Variável dependente.</span> Especifique a variável numérica ou de sequência para analisar.</p>
+<p><span class="runinhead">Método de especificação da variável.</span> É possível especificar um conjunto de variáveis para excluir da análise ou do conjunto de fatores e covariáveis para incluir na análise. Se você não especificar nenhuma variável a ser excluída ou quaisquer fatores ou covariáveis candidatos, todas as variáveis (exceto a variável dependente e a variável de ponderação) serão incluídas.</p>
+<p><span class="runinhead">Variáveis a serem excluídas.</span> Especifique as variáveis a serem excluídas da análise. Por padrão, o procedimento seleciona os melhores preditores das variáveis restantes (a variável dependente e a variável de ponderação são sempre excluídas).</p>
+<p><span class="runinhead">Fatores e covariáveis.</span> Especifique os fatores e covariáveis a serem incluídos na análise. Os fatores são tratados como variáveis categóricas e podem ter valores numéricos ou valores de sequência. As covariáveis são tratadas como variáveis de escala e devem ser numéricas. Por padrão, o procedimento seleciona os melhores preditores do conjunto especificado de fatores e covariáveis.</p>
+<p><span class="runinhead">Variáveis forçadas.</span> É possível especificar fatores e covariáveis que sempre são usados no modelo de classificação. Os fatores forçados são tratados como variáveis categóricas e podem ter valores numéricos ou valores de sequência. As covariáveis forçadas são tratadas como variáveis de escala e devem ser numéricas.</p>
+<h2>Saída</h2>
+<p><span class="runinhead">Resumo do processamento de caso.</span> Resuma o número de casos que são incluídos e excluídos da análise.</p>
+<p><span class="runinhead">Preditores excluídos.</span> Lista os preditores que são excluídos devido a valores ausentes ou constantes para todos os casos. Os preditores excluídos são exibidos por tipo (categórico ou escala).</p>
+<p><span class="runinhead">Preditores selecionados.</span> Exibe os preditores selecionados por tipo (categórico ou escala).</p>
+<p><span class="runinhead">Resumo de subconjuntos de preditores.</span> Exibe um resumo da sequência de subconjuntos de preditores.</p>
+<p><span class="runinhead">Classificação de casos.</span> Exibe o número de casos que são classificados corretamente e incorretamente para cada categoria de variável dependente. Se os dados do teste forem definidos, os resultados da classificação serão fornecidos para o treinamento e as amostras de teste. Se os dados do teste não forem definidos, os resultados da classificação serão fornecidos apenas para a amostra de treinamento. </p>
+<h2>Salvar</h2>
+<p><span class="runinhead">Valor predito e probabilidades preditas.</span> É possível salvar valores preditos e probabilidades preditas como novas variáveis no conjunto de dados ativo. O valor predito é a categoria da variável dependente com a maior probabilidade posterior, conforme estimado pelo modelo Naive Bayes. As probabilidades preditas das primeiras N categorias da variável dependente são salvas, em que N é 25 por padrão.</p>
+<h2>Opções</h2>
+<p><span class="runinhead">Valores omissos de usuário para variáveis categóricas.</span> Controla se os valores omissos do usuário para variáveis categóricas são excluídos ou incluídos na análise. Os valores omissos para o usuário para variáveis de escala são sempre excluídos. Os valores omissos do sistema para quaisquer variáveis são sempre excluídos.</p>
+<p><span class="runinhead">Amostra de treinamento.</span> É possível particionar o conjunto de dados ativo em amostras de treinamento e teste, especificando uma porcentagem de casos selecionados aleatoriamente para designar à amostra de treinamento.</p>
+<p><span class="runinhead">Seleção do preditor.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Selecione o melhor subconjunto da sequência de subconjuntos</I>. Por padrão, o procedimento Naive Bayes seleciona o melhor subconjunto de preditores de uma sequência de subconjuntos, com um número crescente de preditores em cada subconjunto. O procedimento determina automaticamente o tamanho do maior subconjunto, mas também é possível especificar um tamanho máximo explícito do subconjunto. Quando o conjunto de dados ativo é particionado em amostras de treinamento e teste, é possível escolher se o melhor subconjunto será determinado com base em um critério pseudo-BIC baseado na amostra de treinamento, ou em um critério de dados de teste baseado na amostra de teste.</p>
+<p class="bullet">&bull;&nbsp;<I>Selecione o melhor subconjunto de tamanho especificado</I>. Essa opção especifica o número exato de preditores a serem incluídos no melhor subconjunto.</p>
+<p class="bullet">&bull;&nbsp;<I>Usar todos os preditores especificados</I>. Essa opção indica que todos os preditores especificados são incluídos no subconjunto final e é útil para construção de modelo sem seleção de preditor.</p>
+<p><span class="runinhead">Limite de tempo.</span> Especifica o número máximo de minutos durante os quais o procedimento Naive Bayes pode ser executado. Se o limite de tempo for excedido, o procedimento será finalizado e nenhum resultado será fornecido. Especificar um valor de 0 desliga o cronômetro.</p>
+<p><span class="runinhead">Máximo de memória para armazenar dados de treinamento.</span> Especifica a quantidade máxima de memória em megabytes (MB) que o procedimento Naive Bayes usa para armazenar registros de dados de treinamento ao calcular o log da verossimilhança médio. Se a quantidade de memória necessária para armazenar registros for maior, os dados simulados serão usados.</p>
+<p><span class="runinhead">Número de categorias para preditores de escala.</span> Especifica o número de categorias a serem usadas ao dividir o domínio de um preditor de escala em categorias de largura igual.</p>
+<h2>Recursos adicionais</h2>
+<p>Esse diálogo gera sintaxe para o comando NAIVEBAYES. Na sintaxe NAIVEBAYES, é possível especificar uma variável que particiona o conjunto de dados em amostras de treinamento e teste. Além disso, é possível salvar o modelo Naive Bayes em um arquivo XML para que você possa escorar novos dados com o modelo.</p>
+<p>Para obter mais informações sobre o procedimento Naive Bayes, consulte a documentação do comando NAIVEBAYES no sistema de Ajuda do IBM SPSS Statistics.</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

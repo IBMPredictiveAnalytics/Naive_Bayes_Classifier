@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>朴素贝叶斯</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>朴素贝叶斯</h1>
+<p>“朴素贝叶斯分类器”扩展适用于分类因变量的朴素贝叶斯分类模型。您可以指定是使用所有可用预测变量，还是由该过程选择最佳预测变量。该扩展还可用于在没有分类的情况下选择预测变量。</p>
+<h2>变量</h2>
+<p><span class="runinhead">因变量。</span>指定要分析的数字或字符串变量。</p>
+<p><span class="runinhead">变量规范方法。</span>您可以指定要从分析中排除的一组变量，或指定要包括在分析中的一组因子和协变量。如果未指定要排除的任何变量或者任何候选因子或协变量，那么将包括所有变量（因变量和权重变量除外）。</p>
+<p><span class="runinhead">要排除的变量。</span>指定要从分析中排除的变量。缺省情况下，该过程从剩余变量中选择最佳预测变量（因变量和权重变量始终被排除）。</p>
+<p><span class="runinhead">因子和协变量。</span>指定要包含在分析中的因子和协变量。因子被视为分类变量，并且可以有数字值或字符串值。协变量被视为标度变量，必须是数字变量。缺省情况下，该过程从指定的一组因子和协变量中选择最佳预测变量。</p>
+<p><span class="runinhead">强制变量。</span>您可以指定分类模型中始终使用的因子和协变量。强制因子被视为分类变量，并且可以有数字值或字符串值。强制协变量被视为标度变量，必须是数字变量。</p>
+<h2>输出</h2>
+<p><span class="runinhead">个案处理摘要。</span>汇总分析中包含和排除的个案数。</p>
+<p><span class="runinhead">排除的预测变量。</span>列出由于所有个案的缺失值或常量值而被排除的预测变量。排除的预测变量按类型（分类或刻度）显示。</p>
+<p><span class="runinhead">选定的预测变量。</span>按类型（分类或刻度）显示选定的预测变量。</p>
+<p><span class="runinhead">预测变量子集的摘要。</span>显示预测变量子集序列的摘要。</p>
+<p><span class="runinhead">个案的分类。</span>显示针对每个因变量类别正确和错误分类的个案数。如果定义了检验数据，那么将为训练和检验样本提供分类结果。如果未定义检验数据，那么仅为训练样本提供分类结果。</p>
+<h2>保存(V)</h2>
+<p><span class="runinhead">预测值和预测概率。</span>您可以将预测值和预测概率保存为活动数据集内的新变量。预测值是由朴素贝叶斯模型估算的后验概率最高的因变量类别。将保存因变量的前 N 个类别的预测概率，缺省情况下 N 为 25。</p>
+<h2>选项</h2>
+<p><span class="runinhead">分类变量的用户缺失值。</span>控制在分析中是排除还是包含分类变量的用户缺失值。始终排除标度变量的用户缺失值。始终排除任何变量的系统缺失值。</p>
+<p><span class="runinhead">训练样本。</span>您可以通过指定要分配给训练样本的随机选定个案的百分比，将活动数据集分区为训练和检验样本。</p>
+<p><span class="runinhead">预测变量选择。</span></p>
+<p class="bullet">&bull;&nbsp;<I>从子集序列中选择最佳子集</I>。缺省情况下，朴素贝叶斯过程从子集序列中选择预测变量的最佳子集，每个子集内预测变量的数量越来越多。该过程自动确定最大子集的大小，但您还可以指定显式最大子集大小。如果活动数据集分区为训练和检验样本，您可以选择是根据基于训练样本的伪 BIC 条件还是基于检验样本的检验数据条件来确定最佳子集。</p>
+<p class="bullet">&bull;&nbsp;<I>选择指定大小的最佳子集。</I>此选项指定要包含在最佳子集内的预测变量的确切数量。</p>
+<p class="bullet">&bull;&nbsp;<I>使用所有指定的预测变量。</I>此选项指示所有指定预测变量都包含在最终子集内，这对于在没有选择预测变量的情况下构建模型很有用。</p>
+<p><span class="runinhead">时间限制。</span>指定可以运行朴素贝叶斯过程的最大分钟数。如果超出了时间限制，该过程将终止，并且不会给出任何结果。指定值 0 将关闭计时器。</p>
+<p><span class="runinhead">用于存储训练数据的最大内存。</span>指定在计算平均对数似然时，朴素贝叶斯过程用于存储训练数据记录的最大内存量，以兆字节 (MB) 为单位。如果存储记录所需的内存量较大，那么将改为使用模拟数据。</p>
+<p><span class="runinhead">刻度预测变量的分箱数。</span>指定将刻度预测变量的域划分为等宽分箱时要使用的分箱数。</p>
+<h2>其他功能部件</h2>
+<p>此对话框将生成 NAIVEBAYES 命令的语法。在 NAIVEBAYES 语法中，您可以指定将数据集分区为训练和检验样本的变量。此外，您可以将朴素贝叶斯模型保存为 XML 文件，以便您可以使用该模型对新数据评分。</p>
+<p>有关朴素贝叶斯过程的更多信息，请参阅 IBM SPSS Statistics 帮助系统中的 NAIVEBAYES 命令的文档。</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

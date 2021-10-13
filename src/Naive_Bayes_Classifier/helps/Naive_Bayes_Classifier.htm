@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Naïve Bayes</title>
+<STYLE TYPE="text/css"> 
+<!-- 
+
+H1 {font-weight:bold; color:#006699; font-family:Verdana, Arial, sans-serif;font-size:125%; }
+H2 {font-weight:bold; color:#006699; font-family:Verdana, Arial, sans-serif;font-size:110%; }
+BODY {font-family:Verdana, Arial, sans-serif;font-size:80%; }
+TABLE {font-size:100%;font-family:Verdana, Arial, sans-serif;}
+
+/* paragraph tags */
+.step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+.step-glyph { font-family: Arial, Helvetica, sans-serif; }
+.menuselection {margin-left:10px}
+.bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+.codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;font-family:"courier new",monospace; }
+
+/* inline tags */
+.code {font-family: Courier,fixed pitch;}                           /*** used to tag pieces of code (syntax, Python, R, HTML, etc.)   ***/
+.screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+.name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+.runinhead {font-weight: bold} 
+.superscript {vertical-align:super; font-size:80%}
+.subscript {vertical-align:sub; font-size:80%}
+.symbol {font-family: Symbol}
+
+--> 
+</STYLE>
+</head>
+<body>
+<h1>Naïve Bayes</h1>
+<p>The Naïve Bayes Classifier extension fits the Naïve Bayes classification model for a categorical dependent variable. You can specify whether all available predictors are used or whether the procedure selects the best predictors. The extension can also be used for predictor selection without classification.</p>
+<h2>Variables</h2>
+<p><span class="runinhead">Dependent Variable.</span> Specify the numeric or string variable to analyze.</p>
+<p><span class="runinhead">Variable Specification Method.</span> You can specify either a set of variables to exclude from the analysis or the set of factors and covariates to include in the analysis. If you don't specify any variables to exclude or any candidate factors or covariates, then all variables (except the dependent variable and the weight variable) are included.</p>
+<p><span class="runinhead">Variables to Exclude.</span> Specify variables to exclude from the analysis. By default, the procedure selects the best predictors from the remaining variables (the dependent variable and the weight variable are always excluded).</p>
+<p><span class="runinhead">Factors and Covariates.</span> Specify the factors and covariates to include in the analysis. Factors are treated as categorical variables and can have numeric values or string values. Covariates are treated as scale variables and must be numeric. By default, the procedure selects the best predictors from the specified set of factors and covariates.</p>
+<p><span class="runinhead">Forced Variables.</span> You can specify factors and covariates that are always used in the classification model. Forced factors are treated as categorical variables and can have numeric values or string values. Forced covariates are treated as scale variables and must be numeric.</p>
+<h2>Output</h2>
+<p><span class="runinhead">Case processing summary.</span> Summarizes the number of cases that are included and excluded in the analysis.</p>
+<p><span class="runinhead">Excluded predictors.</span> Lists predictors that are excluded due to missing or constant values for all cases. The excluded predictors are displayed by type (categorical or scale).</p>
+<p><span class="runinhead">Selected predictors.</span> Displays selected predictors by type (categorical or scale).</p>
+<p><span class="runinhead">Summary of predictor subsets.</span> Displays a summary of the sequence of predictor subsets.</p>
+<p><span class="runinhead">Classification of cases.</span> Displays the number of cases that are classified correctly and incorrectly for each dependent variable category. If test data are defined, classification results are given for the training and the test samples. If test data are not defined, classification results are given only for the training sample. </p>
+<h2>Save</h2>
+<p><span class="runinhead">Predicted Value and Predicted Probabilities.</span> You can save predicted values and predicted probabilities as new variables in the active dataset. The predicted value is the dependent variable category with the highest posterior probability as estimated by the Naïve Bayes model. The predicted probabilities of the first N categories of the dependent variable are saved, where N is 25 by default.</p>
+<h2>Options</h2>
+<p><span class="runinhead">User-Missing Values for Categorical Variables.</span> Controls whether user-missing values for categorical variables are excluded or included in the analysis. User-missing values for scale variables are always excluded. System-missing values for any variables are always excluded.</p>
+<p><span class="runinhead">Training Sample.</span> You can partition the active dataset into training and test samples by specifying a percentage of randomly selected cases to assign to the training sample.</p>
+<p><span class="runinhead">Predictor Selection.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Select best subset from sequence of subsets</I>. By default, the Naïve Bayes procedure selects the best subset of predictors from a sequence of subsets, with an increasing number of predictors in each subset. The procedure automatically determines the size of the largest subset but you can also specify an explicit maximum subset size. When the active dataset is partitioned into training and test samples, you can choose whether the best subset is determined from a pseudo-BIC criterion that is based on the training sample or a test data criterion that is based on the test sample.</p>
+<p class="bullet">&bull;&nbsp;<I>Select best subset of specified size</I>. This choice specifies the exact number of predictors to be included in the best subset.</p>
+<p class="bullet">&bull;&nbsp;<I>Use all specified predictors</I>. This choice indicates that all specified predictors are included in the final subset and is useful for model building without predictor selection.</p>
+<p><span class="runinhead">Time limit.</span> Specifies the maximum number of minutes during which the Naïve Bayes procedure can be run. If the time limit is exceeded, the procedure is terminated and no results are given. Specifying a value of 0 turns off the timer.</p>
+<p><span class="runinhead">Maximum memory for storing training data.</span> Specifies the maximum amount of memory in megabytes (MB) that the Naïve Bayes procedure uses to store training data records when computing the average log-likelihood. If the amount of memory that is required to store records is larger, simulated data are used instead.</p>
+<p><span class="runinhead">Number of bins for scale predictors.</span> Specifies the number of bins to use when dividing the domain of a scale predictor into equal-width bins.</p>
+<h2>Additional Features</h2>
+<p>This dialog generates syntax for the NAIVEBAYES command. In NAIVEBAYES syntax, you can specify a variable that partitions the dataset into training and test samples. Also, you can save the Naïve Bayes model to an XML file so that you can score new data with the model.</p>
+<p>For more information about the Naïve Bayes procedure, see the documentation for the NAIVEBAYES command in the IBM® SPSS® Statistics Help system.</p>
+<hr>
+<p style="font-size:80%;">© Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

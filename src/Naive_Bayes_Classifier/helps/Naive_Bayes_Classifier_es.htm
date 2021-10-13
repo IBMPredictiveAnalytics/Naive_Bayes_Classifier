@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Bayesiano ingenuo</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Bayesiano ingenuo</h1>
+<p>La extensión del clasificador Naive Bayes se ajusta al modelo de clasificación Naive Bayes para una variable dependiente categórica. Puede especificar si se utilizan todos los predictores disponibles o si el procedimiento selecciona los mejores predictores. La extensión se puede utilizar también para la selección de predictores sin clasificación.</p>
+<h2>Variables</h2>
+<p><span class="runinhead">Variable dependiente.</span> Especifique la variable numérica o de cadena que se debe analizar.</p>
+<p><span class="runinhead">Método de especificación de variables.</span> Puede especificar un conjunto de variables para excluirlo del análisis o el conjunto de factores y covariables para incluirlo en el análisis. Si no especifica ninguna variable a excluir ni ningún factor candidato o covariable, se incluyen todas las variables (excepto la variable dependiente y la variable de ponderación).</p>
+<p><span class="runinhead">Variables a excluir.</span> Especifique variables para excluirlas del análisis. De manera predeterminada, el procedimiento selecciona los mejores predictores de las variables restantes (la variable dependiente y la variable de ponderación siempre se excluyen).</p>
+<p><span class="runinhead">Factores y covariables.</span> Especifique los factores y las covariables que se deben incluir en el análisis. Los factores se tratan como variables categóricas y pueden tener valores numéricos o de cadena. Las covariables se tratan como variables de escala y deben ser numéricas. De manera predeterminada, el procedimiento selecciona los mejores predictores del conjunto especificado de factores y covariables.</p>
+<p><span class="runinhead">Variables forzadas.</span> Se pueden especificar factores y covariables que siempre se utilizan en el modelo de clasificación. Los factores forzados se tratan como variables categóricas y pueden tener valores numéricos o de cadena. Las covariables forzadas se tratan como variables de escala y deben ser numéricas.</p>
+<h2>Resultado</h2>
+<p><span class="runinhead">Resumen de proceso de casos.</span> Resume el número de casos que se incluyen y excluyen del análisis.</p>
+<p><span class="runinhead">Predictores excluidos.</span> Ofrece una lista de los predictores que se excluyen debido a valores perdidos o constantes para todos los casos. Los predictores excluidos se muestran por tipo (categóricos o de escala).</p>
+<p><span class="runinhead">Predictores seleccionados.</span> Muestra los predictores seleccionados por tipo (categóricos o de escala).</p>
+<p><span class="runinhead">Resumen de subconjuntos de predictores.</span> Muestra un resumen de la secuencia de subconjuntos de predictores.</p>
+<p><span class="runinhead">Clasificación de casos.</span> Muestra el número de casos que están clasificados correcta e incorrectamente para cada categoría de variable dependiente. Si hay datos de prueba definidos, se proporcionan los resultados de la clasificación para las muestras de entrenamiento y prueba. Si no se definen datos de prueba, los resultados de la clasificación solo se proporcionan para la muestra de entrenamiento. </p>
+<h2>Guardar</h2>
+<p><span class="runinhead">Valores pronosticados y probabilidades pronosticadas.</span> Puede guardar valores pronosticados y probabilidades pronosticadas como nuevas variables en el conjunto de datos activo. El valor pronosticado es la categoría de variable dependiente con la mayor probabilidad posterior tal como se ha estimado mediante el modelo Naive Bayes. Se guardan las probabilidades pronosticadas de las primeras N categorías de la variable dependiente, donde N es 25 de manera predeterminada.</p>
+<h2>Opciones</h2>
+<p><span class="runinhead">Valores perdidos del usuario para variables categóricas.</span> Controla si los valores perdidos del usuario para variables categóricas se excluyen del análisis o se incluyen en él. Se excluyen siempre los valores perdidos del usuario para variables de escala. Los valores perdidos del sistema correspondientes a cualquier variable siempre se excluyen.</p>
+<p><span class="runinhead">Muestra de entrenamiento.</span> Puede particionar el conjunto de datos activo en muestras de entrenamiento y de prueba especificando un porcentaje de casos seleccionados aleatoriamente para asignarlos a la muestra de entrenamiento.</p>
+<p><span class="runinhead">Selección de predictores.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Seleccionar el mejor subconjunto de la secuencia de subconjuntos</I>. De manera predeterminada, el procedimiento Naive Bayes selecciona el mejor subconjunto de predictores de una secuencia de subconjuntos, con un número creciente de predictores en cada subconjunto. El procedimiento determina automáticamente el tamaño del subconjunto más grande, pero también se puede especificar un tamaño de subconjunto máximo explícito. Cuando el conjunto de datos activo está particionado en muestras de entrenamiento y de prueba, se puede elegir si el mejor subconjunto se determina a partir de un criterio pseudo-BIC que se basa en la muestra de entrenamiento o en un criterio de datos de prueba que se basa en la muestra de prueba.</p>
+<p class="bullet">&bull;&nbsp;<I>Seleccionar el mejor subconjunto del tamaño especificado</I>. Esta opción especifica el número exacto de predictores que se deben incluir en el mejor subconjunto.</p>
+<p class="bullet">&bull;&nbsp;<I>Usar todos los predictores especificados</I>. Esta opción indica que todos los predictores especificados se incluyen en el subconjunto final y resulta útil para la creación de modelos sin selección de predictor.</p>
+<p><span class="runinhead">Límite de tiempo.</span> Especifica el número máximo de minutos durante el cual se puede ejecutar el procedimiento Naive Bayes. Si se supera el límite de tiempo, el procedimiento se termina y no se proporcionan resultados. Al especificar un valor de 0 se apaga el temporizador.</p>
+<p><span class="runinhead">Máximo de memoria para almacenar datos de entrenamiento.</span> Especifica la cantidad máxima de memoria en megabytes (MB) que el procedimiento Naive Bayes utiliza para almacenar datos de registros de entrenamiento al calcular la log-verosimilitud media. Si la cantidad de memoria que se requiere para almacenar registros es superior, en su lugar se utilizan datos simulados.</p>
+<p><span class="runinhead">Número de intervalos para predictores de escala.</span> Especifica el número de intervalos que se deben usar a dividir el dominio de un predictor de escala en intervalos de ancho igual.</p>
+<h2>Características adicionales</h2>
+<p>Este diálogo genera la sintaxis para el comando NAIVEBAYES. En la sintaxis de NAIVEBAYES, se puede especificar una variable que particione el conjunto de datos en muestras de entrenamiento y de prueba. Además, se puede guardar el modelo Naive Bayes en un archivo XML para poder puntuar datos nuevos con el modelo.</p>
+<p>Para obtener más información sobre el procedimiento Naive Bayes, consulte la documentación del comando NAIVEBAYES en el sistema de ayuda de IBM SPSS Statistics.</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+
