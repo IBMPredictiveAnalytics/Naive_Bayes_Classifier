@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Bayes - naiwny</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Naiwny klasyfikator Bayesowski</h1>
+<p>Rozszerzenie Naiwny klasyfikator Bayesowski dopasowuje model naiwnego klasyfikatora Bayesowskiego dla jakościowej zmiennej zależnej. Można określić, czy używane są wszystkie dostępne predyktory, czy procedura wybiera najlepsze predyktory. Rozszerzenie to może być również używane do wyboru predyktorów bez klasyfikacji.</p>
+<h2>Zmienne</h2>
+<p><span class="runinhead">Zmienna zależna.</span> Określ zmienną numeryczną lub łańcuchową do analizy.</p>
+<p><span class="runinhead">Metoda określania zmiennej.</span> Można określić albo zestaw zmiennych do wykluczenia z analizy, albo zestaw czynników i współzmiennych do włączenia do analizy. Jeśli nie zostaną określone żadne zmienne do wykluczenia lub potencjalne czynniki lub współzmienne, wszystkie zmienne (z wyjątkiem zmiennej zależnej i zmiennej ważącej) są uwzględniane.</p>
+<p><span class="runinhead">Zmienne do wykluczenia.</span> Określ zmienne do wykluczenia z analizy. Domyślnie procedura wybiera najlepsze predyktory spośród pozostałych zmiennych (zmienna zależna i zmienna ważąca są zawsze wykluczane).</p>
+<p><span class="runinhead">Czynniki i współzmienne.</span> Określ czynniki i współzmienne do włączenia do analizy. Czynniki są traktowane jako zmienne jakościowe i mogą mieć wartości liczbowe lub łańcuchowe. Współzmienne są traktowane jako zmienne ilościowe i muszą mieć wartość liczbową. Domyślnie procedura wybiera najlepsze predyktory spośród określonego zestawu czynników i współzmiennych.</p>
+<p><span class="runinhead">Zmienne wymuszone.</span> Można określić czynniki i współzmienne, które są zawsze używane w modelu klasyfikacji. Wymuszone czynniki są traktowane jako zmienne jakościowe i mogą mieć wartości liczbowe lub łańcuchowe. Wymuszone współzmienne są traktowane jako zmienne ilościowe i muszą mieć wartość liczbową.</p>
+<h2>Wyniki</h2>
+<p><span class="runinhead">Podsumowanie przetwarzania przypadku.</span> Podsumowuje liczbę obserwacji włączonych do analizy i wykluczonych z analizy.</p>
+<p><span class="runinhead">Wykluczone predyktory.</span> Generuje wykaz predyktorów wykluczonych z powodu braków danych lub wartości stałych dla wszystkich obserwacji. Wykluczone predyktory są wyświetlane według ich typu (jakościowe lub ilościowe).</p>
+<p><span class="runinhead">Wybrane predyktory.</span> Wyświetla wybrane predyktory według ich typu (jakościowe lub ilościowe).</p>
+<p><span class="runinhead">Podsumowanie podzbiorów predyktorów.</span> Wyświetla podsumowanie kolejności podzbiorów predyktorów.</p>
+<p><span class="runinhead">Klasyfikacja obserwacji.</span> Wyświetla liczbę obserwacji, które zostały sklasyfikowane poprawnie i niepoprawnie dla każdej kategorii zmiennej zależnej. Jeśli zdefiniowano dane testowe, wyniki klasyfikacji są generowane dla próby uczącej i próby testującej. Jeśli nie zdefiniowano danych testowych, wyniki klasyfikacji są generowane tylko dla próby uczącej. </p>
+<h2>Zapisywanie</h2>
+<p><span class="runinhead">Wartość przewidywana i przewidywane prawdopodobieństwa.</span> Wartości przewidywane i przewidywane prawdopodobieństwa można zapisać jako nowe zmienne w aktywnym zbiorze danych. Wartość przewidywana to kategoria zmiennej zależnej z najwyższym prawdopodobieństwem a posteriori oszacowanym na podstawie modelu naiwnego klasyfikatora Bayesowskiego. Przewidywane prawdopodobieństwa pierwszych N kategorii zmiennej zależnej są zapisywane; domyślnie N jest równe 25.</p>
+<h2>Opcje</h2>
+<p><span class="runinhead">Braki danych użytkownika dla zmiennych jakościowych.</span> Określa, czy braki danych użytkownika dla zmiennych jakościowych są wykluczane z analizy lub uwzględniane w analizie. Braki danych zdefiniowane przez użytkownika dla zmiennych ilościowych będą zawsze wykluczone. Systemowe braki danych dla dowolnej zmiennej będą zawsze wykluczone.</p>
+<p><span class="runinhead">Próba ucząca.</span> Aktywny zbiór danych można podzielić na próby uczące i testujące, określając procent losowo wybranych obserwacji, które mają zostać przypisane do próby uczącej.</p>
+<p><span class="runinhead">Selekcja predyktorów.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Wybierz najlepszy podzbiór z sekwencji podzbiorów</I>. Domyślnie procedura Naiwny klasyfikator Bayesowski wybiera najlepszy podzbiór predyktorów z sekwencji podzbiorów, z rosnącą liczbą predyktorów w każdym podzbiorze. Procedura automatycznie określa rozmiar największego podzbioru, ale można również określić jawny maksymalny rozmiar podzbioru. Gdy aktywny zbiór danych jest dzielony na próbę uczącą i testującą, można wybrać, czy najlepszy podzbiór jest określany na podstawie kryterium pseudo-BIC, czyli na podstawie próby uczącej, czy kryterium danych testowych, czyli na podstawie próby testującej.</p>
+<p class="bullet">&bull;&nbsp;<I>Wybierz najlepszy podzbiór w określonym rozmiarze</I>. Wybór ten określa dokładną liczbę predyktorów, które mają zostać uwzględnione w najlepszym podzbiorze.</p>
+<p class="bullet">&bull;&nbsp;<I>Użyj wszystkich określonych podzbiorów</I>. Wybór ten wskazuje, że wszystkie określone predyktory są uwzględniane w finalnym podzbiorze i jest przydatny do budowania modelu bez selekcji predyktorów.</p>
+<p><span class="runinhead">Limit czasu.</span> Określa maksymalną liczbę minut wykonywania procedury Naiwny klasyfikator Bayesowski. Jeśli limit czasu zostanie przekroczony, procedura zostaje przerwana i nie są podawane żadne wyniki. Podanie wartości równej 0 powoduje wyłączenie licznika.</p>
+<p><span class="runinhead">Maksymalna ilość pamięci do przechowywania danych uczących.</span> Określa maksymalną ilość pamięci w megabitach (MB) wykorzystywaną przez procedurę Naiwny klasyfikator Bayesowski do przechowywania rekordów danych uczących podczas obliczania średniego logarytmu wiarygodności. Jeśli ilość pamięci wymagana do przechowywania rekordów jest większa, zamiast nich używane są dane symulowane.</p>
+<p><span class="runinhead">Liczba kategorii dla predyktorów ilościowych.</span> Określa liczbę przedziałów wykorzystywanych podczas dzielenia domeny predyktora ilościowego na przedziały o równych szerokościach.</p>
+<h2>Funkcje dodatkowe</h2>
+<p>To okno dialogowe generuje komendę NAIVEBAYES. Za pomocą komendy NAIVEBAYES można określić zmienną, która dzieli zbiór danych na próbę uczącą i próbę testującą. Można również zapisać model Naiwny klasyfikator Bayesowski do pliku XML w celu oceny nowych danych za pomocą tego modelu.</p>
+<p>Więcej informacji na temat procedury Naiwny klasyfikator Bayesowski zawiera dokumentacja dotycząca komendy NAIVEBAYES w systemie pomocy IBM SPSS Statistics.</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

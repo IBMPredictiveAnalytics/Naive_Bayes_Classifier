@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Naiver Bayes-Klassifikator</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>Naiver Bayes-Klassifikator</h1>
+<p>Die Naive Bayes-Klassifikator-Erweiterung passt das Naive Bayes-Klassifikationsmodell für eine kategoriale abhängige Variable an. Sie können festlegen, ob alle verfügbaren Prädiktoren verwendet werden oder ob die Prozedur die besten Prädiktoren auswählt. Die Erweiterung kann auch für die Auswahl von Prädiktoren ohne Klassifikation verwendet werden.</p>
+<h2>Variablen</h2>
+<p><span class="runinhead">Abhängige Variable.</span> Geben Sie die zu analysierende numerische oder String-Variable an.</p>
+<p><span class="runinhead">Variablenspezifikationsmethode.</span> Sie können entweder eine Gruppe von Variablen angeben, die von der Analyse ausgeschlossen werden sollen, oder die Gruppe von Faktoren und Kovariaten, die in die Analyse einbezogen werden sollen. Wenn Sie keine auszuschließenden Variablen oder mögliche Faktoren oder Kovariaten angeben, werden alle Variablen (außer der abhängigen Variable und der Gewichtungsvariable) einbezogen.</p>
+<p><span class="runinhead">Auszuschließende Variablen.</span> Geben Sie die Variablen an, die von der Analyse ausgeschlossen werden sollen. Standardmäßig wählt die Prozedur die besten Prädiktoren aus den verbleibenden Variablen aus (die abhängige Variable und die Gewichtungsvariable werden immer ausgeschlossen).</p>
+<p><span class="runinhead">Faktoren und Kovariaten.</span> Geben Sie die Faktoren und Kovariaten an, die in die Analyse einbezogen werden sollen. Faktoren werden als kategoriale Variablen behandelt und können numerische Werte oder String-Werte haben. Kovariaten werden als Skalenvariablen behandelt und müssen numerisch sein. Standardmäßig wählt die Prozedur die besten Prädiktoren aus der angegebenen Gruppe von Faktoren und Kovariaten aus.</p>
+<p><span class="runinhead">Zwangsvariablen.</span> Sie können Faktoren und Kovariaten angeben, die immer im Klassifikationsmodell verwendet werden. Erzwungene Faktoren werden als kategoriale Variablen behandelt und können numerische Werte oder String-Werte haben. Erzwungene Kovariaten werden als Skalenvariablen behandelt und müssen numerisch sein. </p>
+<h2>Ausgabe</h2>
+<p><span class="runinhead">Zusammenfassung der Fallverarbeitung.</span> Fasst die Fälle zusammen, die in die Analyse aufgenommen bzw. aus ihr ausgeschlossen werden.</p>
+<p><span class="runinhead">Ausgeschlossene Prädiktoren.</span> Listet Prädiktoren auf, die aufgrund fehlender oder konstanter Werte für alle Fälle ausgeschlossen sind. Die ausgeschlossenen Prädiktoren werden nach Typ (kategorial oder Skala) angezeigt.</p>
+<p><span class="runinhead">Ausgewählte Prädiktoren.</span> Zeigt ausgewählte Prädiktoren nach Typ (kategorial oder Skala) an.</p>
+<p><span class="runinhead">Zusammenfassung der Prädiktorsubsets.</span> Zeigt eine Zusammenfassung der Folge der Prädiktorsubsets an.</p>
+<p><span class="runinhead">Klassifikation von Fällen.</span> Zeigt die Anzahl der Fälle an, die für jede Kategorie der abhängigen Variablen richtig und falsch klassifiziert wurden. Wenn Testdaten definiert sind, werden die Klassifikationsergebnisse für die Trainings- und die Teststichprobe angegeben. Wenn keine Testdaten definiert sind, werden die Klassifikationsergebnisse nur für die Trainingsstichprobe angegeben.</p>
+<h2>Speichern</h2>
+<p><span class="runinhead">Vorhergesagter Wert und vorhergesagte Wahrscheinlichkeiten.</span> Sie können vorhergesagte Werte und vorhergesagte Wahrscheinlichkeiten als neue Variablen im aktiven Dataset speichern. Der vorhergesagte Wert ist die Kategorie der abhängigen Variable mit der höchsten A-posteriori-Wahrscheinlichkeit, die durch das Naive Bayes-Modell geschätzt wird. Die vorhergesagten Wahrscheinlichkeiten der ersten N Kategorien der abhängigen Variable werden gespeichert, wobei N standardmäßig 25 ist.</p>
+<h2>Optionen</h2>
+<p><span class="runinhead">Benutzerdefiniert fehlende Werte für kategoriale Variablen.</span> Steuert, ob benutzerdefiniert fehlende Werte für kategoriale Variablen in die Analyse aufgenommen bzw. aus ihr ausgeschlossen werden. Benutzerdefiniert fehlende Werte für metrische Variablen werden stets ausgeschlossen. Systemdefiniert fehlende Werte für beliebige Variablen werden immer ausgeschlossen.</p>
+<p><span class="runinhead">Trainingsstichprobe.</span> Sie können das aktiven Dataset in eine Trainings- und eine Teststichprobe aufteilen, indem Sie einen Prozentsatz zufällig ausgewählter Fälle angeben, der der Trainingsstichprobe zugeordnet werden soll.</p>
+<p><span class="runinhead">Prädiktorauswahl.</span> </p>
+<p class="bullet">&bull;&nbsp;<I>Bestes Subset aus einer Folge von Subsets auswählen</I>. Standardmäßig wählt die Naive Bayes-Prozedur die besten Subsets von Prädiktoren aus einer Reihe von Subsets aus, wobei die Anzahl der Prädiktoren in jedem Subset zunimmt. Die Prozedur bestimmt automatisch die Größe des größten Subsets, aber Sie können auch explizit eine maximale Subsetgröße angeben. Wenn das aktive Dataset in Trainings- und Teststichproben unterteilt ist, können Sie wählen, ob das beste Subset anhand eines Pseudo-BIC-Kriteriums, das auf der Trainingsstichprobe basiert, oder eines Testdatenkriteriums, das auf der Teststichprobe basiert, bestimmt wird.</p>
+<p class="bullet">&bull;&nbsp;<I>Bestes Subset der angegebenen Größe auswählen</I>. Diese Auswahl legt die genaue Anzahl der Prädiktoren fest, die in das beste Subset aufgenommen werden.</p>
+<p class="bullet">&bull;&nbsp;<I>Alle angegebenen Prädiktoren verwenden</I>. Diese Auswahl gibt an, dass alle angegebenen Prädiktoren im endgültigen Subset enthalten sind, und ist für die Modellerstellung ohne Prädiktorauswahl nützlich.</p>
+<p><span class="runinhead">Zeitlimit.</span> Legt die maximale Dauer (in Minuten) fest, während der die Naive Bayes-Prozedur ausgeführt werden kann. Wird das Zeitlimit überschritten, wird die Prozedur abgebrochen und es werden keine Ergebnisse angezeigt. Bei einem Wert von 0 wird der Zeitgeber ausgeschaltet.</p>
+<p><span class="runinhead">Maximale Speichergröße für das Speichern von Trainingsdaten.</span> Gibt die maximale Speichermenge in Megabyte (MB) an, die die Naive Bayes-Prozedur zum Speichern von Trainingsdatensätzen bei der Berechnung der durchschnittlichen Log-Likelihood verwendet. Ist der für das Speichern von Datensätzen erforderliche Speicherplatz größer, werden stattdessen simulierte Daten verwendet.</p>
+<p><span class="runinhead">Anzahl der Klassen für metrische Prädiktoren.</span> Gibt die Anzahl der Klassen an, die bei der Unterteilung der Domäne eines metrischen Prädiktors in Klassen mit gleicher Breite verwendet werden sollen.</p>
+<h2>Weitere Funktionen</h2>
+<p>In diesem Dialogfeld wird Syntax für den Erweiterungsbefehl NAIVEBAYES erzeugt. In der Syntax von NAIVEBAYES können Sie eine Variable angeben, die das Dataset in Trainings- und Teststichproben unterteilt. Außerdem können Sie das Naive Bayes-Modell in einer XML-Datei speichern, um neue Daten mit dem Modell zu bewerten.</p>
+<p>Weitere Informationen über die Naive Bayes-Prozedur finden Sie in der Dokumentation zum Befehl NAIVEBAYES im IBM SPSS Statistics-Hilfesystem.</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+

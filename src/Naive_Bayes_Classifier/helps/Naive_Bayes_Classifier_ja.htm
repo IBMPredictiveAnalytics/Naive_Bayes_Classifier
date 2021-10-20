@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <title>NaiveBayes</title>
+  <style type="text/css">
+
+  <!-- 
+
+  H1 {font-weight:bold; color:#006699; font-size:125%; }
+  H2 {font-weight:bold; color:#006699; font-size:110%; }
+  TABLE {font-size:100%;}
+
+  /* paragraph tags */
+  .step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+  .menuselection {margin-left:10px}
+  .bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+  .codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px;}
+
+  /* inline tags */
+  .screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+  .name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+  .runinhead {font-weight: bold} 
+  .superscript {vertical-align:super; font-size:80%}
+  .subscript {vertical-align:sub; font-size:80%}
+
+
+  --> 
+  </style>
+</head>
+<body>
+<h1>NaiveBayes</h1>
+<p>ナイーブ ベイズ分類器の拡張機能は、カテゴリ型従属変数のナイーブ ベイズ分類モデルに適しています。使用可能な予測変数をすべて使用するか、プロシージャに最良の予測変数を選択させるかを指定できます。この拡張機能は、分類せずに予測変数の選択に使用することもできます。</p>
+<h2>変数</h2>
+<p><span class="runinhead">従属変数:</span> 分析対象の数値型または文字型の変数を指定します。</p>
+<p><span class="runinhead">変数の指定方法:</span> 分析から除外する一連の変数、または分析に含める一連の因子と共変量を指定できます。除外する変数も因子または共変量の候補も指定しない場合は、(従属変数と重み付け変数を除いて) すべての変数が対象になります。</p>
+<p><span class="runinhead">除外する変数:</span> 分析から除外する変数を指定します。デフォルトでは、残りの変数からプロシージャが最適な予測変数を選択します (従属変数と重み付け変数は常に除外されます)。</p>
+<p><span class="runinhead">因子と共変量:</span> 分析に含める因子と共変量を指定します。因子はカテゴリ変数として扱われ、数値または文字列値を持つことができます。共変量はスケール変数として扱われ、数値でなければなりません。デフォルトでは、このプロシージャが、指定された一連の因子と共変量から最適な予測変数を選択します。</p>
+<p><span class="runinhead">強制変数:</span> 分類モデルで常に使用する因子と共変量を指定できます。強制因子はカテゴリ変数として扱われ、数値または文字列値を持つことができます。強制共変量はスケール変数として扱われ、数値でなければなりません。</p>
+<h2>出力</h2>
+<p><span class="runinhead">ケース処理の要約:</span> 分析の対象とするケースと、分析から除外するケースの数が要約されます。</p>
+<p><span class="runinhead">除外された予測変数:</span> すべてのケースで欠損値であるか定数値であるために除外された予測変数をリストします。除外された予測変数は、型 (カテゴリまたはスケール) ごとに表示されます。</p>
+<p><span class="runinhead">選択された予測変数:</span> 型 (カテゴリまたはスケール) ごとに、選択された予測変数が表示されます。</p>
+<p><span class="runinhead">予測変数のサブセットの要約:</span> 予測変数のサブセットの系列の要約を表示します。</p>
+<p><span class="runinhead">ケースの分類:</span> 従属変数のカテゴリごとに、正しく分類されたケースと誤って分類されたケースの数を表示します。テスト データが定義されている場合は、学習サンプルおよびテスト サンプルに対する分類結果が表示されます。テスト データが定義されていない場合は、学習サンプルに対する分類結果のみが表示されます。</p>
+<h2>保存</h2>
+<p><span class="runinhead">予測値と予測確率:</span> 予測値と予測確率を、アクティブ データセットに新しい予測変数として保存できます。予測値は、ナイーブ ベイズ モデルによって推定された事後確率が最も高い従属変数のカテゴリです。従属変数の最初の N 件のカテゴリの予測確率が保存されます。N のデフォルトは 25 です。</p>
+<h2>オプション</h2>
+<p><span class="runinhead">カテゴリ変数のユーザー欠損値:</span> カテゴリ変数のユーザー欠損値を分析から除外するか分析対象にするかを制御します。スケール変数に対するユーザー欠損値は常に除外されます。いずれの変数でも、システム欠損値は常に除外されます。</p>
+<p><span class="runinhead">学習サンプル:</span> 無作為に選択して学習サンプルに割り当てるケースの割合を指定することにより、アクティブ データセットを学習サンプルとテスト サンプルに区分できます。</p>
+<p><span class="runinhead">予測変数の選択:</span> </p>
+<p class="bullet">&bull;&nbsp;<I>サブセットの系列からベスト サブセットを選択</I> : デフォルトでは、ナイーブ ベイズ プロシージャは、各サブセット内の予測変数の数が増加していくサブセットの系列から、最適な予測変数のサブセットを選択します。このプロシージャは最大のサブセットのサイズを自動的に判別しますが、明示的な最大サブセット サイズを指定することもできます。アクティブ データセットが学習サンプルとテスト サンプルに区分されている場合は、ベスト サブセットを判別する基準として、学習サンプルに基づく疑 BIC 基準と、テスト サンプルに基づくテスト データ基準のいずれかを選択できます。</p>
+<p class="bullet">&bull;&nbsp;<I>指定したサイズのベスト サブセットを選択</I> : この選択項目は、ベスト サブセットに含める予測変数の数を厳密に指定します。</p>
+<p class="bullet">&bull;&nbsp;<I>指定したすべての予測変数を使用</I> : この選択項目は、指定したすべての予測変数を最終的なサブセットに含めることを指定します。予測変数を選択しないモデル構築の場合に有用です。</p>
+<p><span class="runinhead">制限時間:</span> ナイーブ ベイズ プロシージャを実行できる最大の時間 (分) を指定します。制限時間を超えると、プロシージャが終了します。結果は出力されません。値 0 を指定すると、タイマがオフになります。</p>
+<p><span class="runinhead">学習データ格納用メモリの最大値:</span> ナイーブ ベイズ プロシージャが平均対数尤度の計算時に学習データのレコードを格納するために使用するメモリの最大量をメガバイト (MB) 単位で指定します。レコードの格納に必要なメモリの量が大きい場合は、代わりにシミュレーション データが使用されます。</p>
+<p><span class="runinhead">スケール予測変数のビン数:</span> スケール予測変数のドメインを等幅のビンに分割するときに使用するビンの数を指定します。</p>
+<h2>その他の機能</h2>
+<p>このダイアログは、NAIVEBAYES コマンドのシンタックスを生成します。NAIVEBAYES のシンタックスでは、データセットを学習サンプルとテスト サンプルに区分する変数を指定できます。また、ナイーブ ベイズ モデルを XML ファイルに保存して、モデルで新しいデータをスコアリングすることもできます。</p>
+<p>ナイーブ ベイズ プロシージャについて詳しくは、IBM SPSS Statistics ヘルプ システムの NAIVEBAYES コマンドの資料を参照してください。</p>
+<hr>
+<p style="font-size:80%;">Copyright IBM Corp. 1989, 2016</p>
+</body>
+
+
+
