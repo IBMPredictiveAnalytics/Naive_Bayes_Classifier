@@ -9,6 +9,6 @@ Description: This extension provides a user interface for the NAIVEBAY
  The extension can also be used for predictor selection without classi
  fication.
 Author: IBM SPSS
-Version: 1.0.1
+Version: 1.0.2
 Product-Version: 24
 Product-Version-Maximum: 99
