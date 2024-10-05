@@ -1,5 +1,5 @@
 Name: Naive Bayes Classifier
-Display-Name: Naive Bayes Classification
+Display-Name: Naive Bayes
 Dialog-Specs: Naive_Bayes_Classifier.cfe
 Summary: Naive Bayes classification with optional predictor selection
 Description: This extension provides a user interface for the NAIVEBAY
